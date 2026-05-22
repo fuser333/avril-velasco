@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sube tu Trabajo — Avril Velasco</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #D4AF37;
+      --terracotta: #C67B5C;
+      --ink: #1A1A1A;
+      --parchment: #F5F0EB;
+      --bronze: #8B7355;
+      --espresso: #2C1810;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: var(--ink);
+      color: var(--parchment);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+    .container {
+      max-width: 680px;
+      width: 100%;
+      text-align: center;
+    }
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 8px;
+      letter-spacing: 2px;
+    }
+    .subtitle {
+      font-size: 0.9rem;
+      color: var(--bronze);
+      margin-bottom: 40px;
+      font-weight: 300;
+    }
+    .card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(212,175,55,0.15);
+      border-radius: 20px;
+      padding: 48px 40px;
+      backdrop-filter: blur(10px);
+      margin-bottom: 24px;
+    }
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--parchment);
+      margin-bottom: 16px;
+    }
+    p.desc {
+      font-size: 0.95rem;
+      color: rgba(245,240,235,0.7);
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+    .upload-zone {
+      border: 2px dashed rgba(212,175,55,0.3);
+      border-radius: 16px;
+      padding: 48px 32px;
+      background: rgba(212,175,55,0.02);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      margin-bottom: 24px;
+    }
+    .upload-zone:hover {
+      border-color: var(--gold);
+      background: rgba(212,175,55,0.05);
+    }
+    .upload-zone svg {
+      width: 48px;
+      height: 48px;
+      stroke: var(--gold);
+      margin-bottom: 16px;
+    }
+    .upload-zone p {
+      font-size: 1rem;
+      color: var(--parchment);
+      margin-bottom: 8px;
+    }
+    .upload-zone span {
+      font-size: 0.8rem;
+      color: var(--bronze);
+    }
+    input[type="file"] {
+      display: none;
+    }
+    .btn {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--gold), var(--terracotta));
+      color: var(--ink);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 14px 40px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-decoration: none;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(212,175,55,0.25);
+    }
+    .file-list {
+      text-align: left;
+      margin: 24px 0;
+    }
+    .file-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 16px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 10px;
+      margin-bottom: 8px;
+      font-size: 0.85rem;
+    }
+    .file-item svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--gold);
+      flex-shrink: 0;
+    }
+    .alt-options {
+      margin-top: 32px;
+      padding-top: 32px;
+      border-top: 1px solid rgba(212,175,55,0.1);
+    }
+    .alt-options h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+    .alt-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .alt-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(212,175,55,0.1);
+      border-radius: 12px;
+      padding: 20px;
+      text-decoration: none;
+      color: var(--parchment);
+      transition: all 0.3s ease;
+    }
+    .alt-card:hover {
+      border-color: var(--gold);
+      background: rgba(212,175,55,0.03);
+    }
+    .alt-card strong {
+      display: block;
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+      color: var(--gold);
+    }
+    .alt-card span {
+      font-size: 0.75rem;
+      color: var(--bronze);
+    }
+    .footer {
+      margin-top: 40px;
+      font-size: 0.75rem;
+      color: var(--bronze);
+    }
+    @media (max-width: 600px) {
+      .alt-grid { grid-template-columns: 1fr; }
+      .card { padding: 32px 24px; }
+      h1 { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo">AVRIL VELASCO</div>
+    <div class="subtitle">PORTAFOLIO — ENVÍO DE MATERIAL</div>
+
+    <div class="card">
+      <h1>Sube tu mejor trabajo</h1>
+      <p class="desc">
+        Selecciona tus mejores diseños, fotos, videos y proyectos.
+        Aceptamos imágenes (JPG, PNG), videos (MP4) y documentos (PDF).
+        Tamaño máximo recomendado: 50MB por archivo.
+      </p>
+
+      <div class="upload-zone" id="dropZone" onclick="document.getElementById('fileInput').click()">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        <p>Arrastra archivos aquí o haz clic para seleccionar</p>
+        <span>JPG, PNG, MP4, PDF • Hasta 50MB cada uno</span>
+      </div>
+      <input type="file" id="fileInput" multiple accept="image/*,video/mp4,application/pdf">
+
+      <div class="file-list" id="fileList"></div>
+
+      <button class="btn" id="sendBtn" onclick="sendFiles()" style="display:none;">Enviar archivos</button>
+      <p id="status" style="margin-top:16px;font-size:0.85rem;color:var(--bronze);display:none;"></p>
+    </div>
+
+    <div class="alt-options">
+      <h3>¿Problemas con la subida?</h3>
+      <div class="alt-grid">
+        <a href="https://wetransfer.com" target="_blank" class="alt-card">
+          <strong>WeTransfer</strong>
+          <span>Sube gratis hasta 2GB y envía el enlace por WhatsApp</span>
+        </a>
+        <a href="https://drive.google.com/drive/folders/1Ejemplo" target="_blank" class="alt-card">
+          <strong>Google Drive</strong>
+          <span>Sube a esta carpeta compartida</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer">
+      ¿Dudas? Escríbeme por WhatsApp al +593 999568215
+    </div>
+  </div>
+
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    // CONFIGURACIÓN: Reemplazar con tus datos de EmailJS
+    const EMAILJS_CONFIG = {
+      publicKey: 'TU_PUBLIC_KEY',      // Reemplazar
+      serviceId: 'TU_SERVICE_ID',       // Reemplazar
+      templateId: 'TU_TEMPLATE_ID'      // Reemplazar
+    };
+
+    let selectedFiles = [];
+    const dropZone = document.getElementById('dropZone');
+    const fileInput = document.getElementById('fileInput');
+    const fileList = document.getElementById('fileList');
+    const sendBtn = document.getElementById('sendBtn');
+    const status = document.getElementById('status');
+
+    // Drag & drop
+    dropZone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dropZone.style.borderColor = '#D4AF37';
+      dropZone.style.background = 'rgba(212,175,55,0.05)';
+    });
+    dropZone.addEventListener('dragleave', () => {
+      dropZone.style.borderColor = '';
+      dropZone.style.background = '';
+    });
+    dropZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropZone.style.borderColor = '';
+      dropZone.style.background = '';
+      handleFiles(e.dataTransfer.files);
+    });
+
+    fileInput.addEventListener('change', (e) => {
+      handleFiles(e.target.files);
+    });
+
+    function handleFiles(files) {
+      selectedFiles = [...selectedFiles, ...Array.from(files)];
+      renderFileList();
+    }
+
+    function renderFileList() {
+      if (selectedFiles.length === 0) {
+        fileList.innerHTML = '';
+        sendBtn.style.display = 'none';
+        return;
+      }
+      fileList.innerHTML = selectedFiles.map((f, i) => `
+        <div class="file-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          <span style="flex:1">${f.name}</span>
+          <span style="color:var(--bronze);font-size:0.75rem">${(f.size/1024/1024).toFixed(1)} MB</span>
+          <button onclick="removeFile(${i})" style="background:none;border:none;color:var(--terracotta);cursor:pointer;font-size:1rem">×</button>
+        </div>
+      `).join('');
+      sendBtn.style.display = 'inline-block';
+    }
+
+    function removeFile(index) {
+      selectedFiles.splice(index, 1);
+      renderFileList();
+    }
+
+    async function sendFiles() {
+      // Verificar si EmailJS está configurado
+      if (EMAILJS_CONFIG.publicKey === 'TU_PUBLIC_KEY') {
+        status.style.display = 'block';
+        status.innerHTML = '⚠️ <strong>EmailJS no configurado aún.</strong><br>Por ahora usa WeTransfer o Google Drive (opciones de abajo).';
+        return;
+      }
+
+      status.style.display = 'block';
+      status.innerHTML = '⏳ Enviando archivos...';
+      sendBtn.disabled = true;
+
+      try {
+        emailjs.init(EMAILJS_CONFIG.publicKey);
+
+        // Convertir archivos a base64
+        const attachments = await Promise.all(selectedFiles.map(file => {
+          return new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve({
+              name: file.name,
+              data: reader.result.split(',')[1],
+              type: file.type
+            });
+            reader.readAsDataURL(file);
+          });
+        }));
+
+        await emailjs.send(EMAILJS_CONFIG.serviceId, EMAILJS_CONFIG.templateId, {
+          from_name: 'Avril Velasco',
+          message: `Nuevos archivos del portafolio (${attachments.length} archivos)`,
+          attachments: JSON.stringify(attachments)
+        });
+
+        status.innerHTML = '✅ <strong>¡Archivos enviados!</strong><br>Gracias, los revisaré pronto.';
+        selectedFiles = [];
+        renderFileList();
+      } catch (err) {
+        status.innerHTML = '❌ Error al enviar. Intenta con WeTransfer o Google Drive.';
+        console.error(err);
+      } finally {
+        sendBtn.disabled = false;
+      }
+    }
+  </script>
+</body>
+</html>

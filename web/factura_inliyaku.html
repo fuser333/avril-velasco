@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factura EEQ - INLIYAKU SA</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 9pt;
+            line-height: 1.3;
+            color: #000;
+            background: #fff;
+        }
+        
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 15mm 12mm;
+            margin: 0 auto;
+            background: #fff;
+            position: relative;
+        }
+        
+        @media print {
+            .page {
+                width: 100%;
+                padding: 10mm;
+                margin: 0;
+            }
+        }
+        
+        /* HEADER */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 8px;
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .header-logo {
+            width: 60px;
+            height: auto;
+        }
+        
+        .header-company {
+            font-size: 9pt;
+        }
+        
+        .header-company h1 {
+            font-size: 11pt;
+            font-weight: bold;
+            margin-bottom: 2px;
+        }
+        
+        .header-company p {
+            font-size: 7.5pt;
+            line-height: 1.4;
+        }
+        
+        .header-right {
+            text-align: right;
+            font-size: 8pt;
+        }
+        
+        .header-right table {
+            border-collapse: collapse;
+        }
+        
+        .header-right td {
+            padding: 1px 4px;
+            font-size: 8pt;
+        }
+        
+        .header-right td:first-child {
+            text-align: right;
+            font-weight: bold;
+        }
+        
+        /* FACTURA INFO BOX */
+        .factura-box {
+            border: 1px solid #000;
+            padding: 6px 10px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .factura-box-left {
+            font-size: 8pt;
+        }
+        
+        .factura-box-left p {
+            margin-bottom: 1px;
+        }
+        
+        .factura-box-left .label {
+            font-weight: bold;
+        }
+        
+        .factura-box-right {
+            text-align: right;
+        }
+        
+        .factura-box-right .numero-factura {
+            font-size: 14pt;
+            font-weight: bold;
+            color: #c00;
+        }
+        
+        .factura-box-right .valor-total {
+            font-size: 16pt;
+            font-weight: bold;
+            color: #c00;
+        }
+        
+        /* CONSUMER INFO */
+        .consumer-section {
+            margin-bottom: 8px;
+        }
+        
+        .consumer-title {
+            background: #e0e0e0;
+            padding: 3px 6px;
+            font-weight: bold;
+            font-size: 8pt;
+            margin-bottom: 4px;
+        }
+        
+        .consumer-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            font-size: 8pt;
+        }
+        
+        .consumer-grid table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .consumer-grid td {
+            padding: 2px 4px;
+            vertical-align: top;
+        }
+        
+        .consumer-grid td:first-child {
+            font-weight: bold;
+            width: 35%;
+        }
+        
+        /* SERVICE INFO */
+        .service-section {
+            margin-bottom: 8px;
+        }
+        
+        .service-header {
+            background: #e0e0e0;
+            padding: 3px 6px;
+            font-weight: bold;
+            font-size: 8pt;
+            margin-bottom: 4px;
+        }
+        
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 4px;
+            font-size: 7.5pt;
+            margin-bottom: 8px;
+        }
+        
+        .service-grid .box {
+            border: 1px solid #999;
+            padding: 4px;
+            text-align: center;
+        }
+        
+        .service-grid .box-label {
+            font-weight: bold;
+            font-size: 7pt;
+            margin-bottom: 2px;
+        }
+        
+        .service-grid .box-value {
+            font-size: 9pt;
+            font-weight: bold;
+        }
+        
+        /* READING TABLE */
+        .reading-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 8px;
+            font-size: 8pt;
+        }
+        
+        .reading-table th {
+            background: #e0e0e0;
+            border: 1px solid #999;
+            padding: 3px 4px;
+            text-align: center;
+            font-size: 7.5pt;
+        }
+        
+        .reading-table td {
+            border: 1px solid #999;
+            padding: 3px 4px;
+            text-align: center;
+        }
+        
+        /* CHARGES TABLE */
+        .charges-section {
+            margin-bottom: 8px;
+        }
+        
+        .charges-title {
+            background: #e0e0e0;
+            padding: 3px 6px;
+            font-weight: bold;
+            font-size: 8pt;
+            margin-bottom: 4px;
+        }
+        
+        .charges-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 8pt;
+        }
+        
+        .charges-table th {
+            background: #f0f0f0;
+            border: 1px solid #999;
+            padding: 3px 4px;
+            text-align: left;
+            font-size: 7.5pt;
+        }
+        
+        .charges-table td {
+            border: 1px solid #999;
+            padding: 3px 4px;
+        }
+        
+        .charges-table td:last-child {
+            text-align: right;
+        }
+        
+        .charges-table .total-row {
+            font-weight: bold;
+            background: #f5f5f5;
+        }
+        
+        /* PENDING VALUES */
+        .pending-section {
+            margin-bottom: 8px;
+        }
+        
+        .pending-title {
+            background: #e0e0e0;
+            padding: 3px 6px;
+            font-weight: bold;
+            font-size: 8pt;
+            margin-bottom: 4px;
+        }
+        
+        .pending-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 8pt;
+        }
+        
+        .pending-table th, .pending-table td {
+            border: 1px solid #999;
+            padding: 3px 4px;
+        }
+        
+        .pending-table th {
+            background: #f0f0f0;
+            text-align: left;
+        }
+        
+        .pending-table td:last-child {
+            text-align: right;
+        }
+        
+        /* PAYMENT INFO */
+        .payment-section {
+            margin-bottom: 8px;
+        }
+        
+        .payment-title {
+            background: #e0e0e0;
+            padding: 3px 6px;
+            font-weight: bold;
+            font-size: 8pt;
+            margin-bottom: 4px;
+        }
+        
+        .payment-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 8pt;
+        }
+        
+        .payment-table th, .payment-table td {
+            border: 1px solid #999;
+            padding: 3px 4px;
+        }
+        
+        .payment-table th {
+            background: #f0f0f0;
+        }
+        
+        .payment-table td:last-child {
+            text-align: right;
+        }
+        
+        /* SUMMARY BOX */
+        .summary-box {
+            border: 2px solid #000;
+            padding: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .summary-box-title {
+            font-weight: bold;
+            font-size: 9pt;
+            margin-bottom: 4px;
+            text-align: center;
+        }
+        
+        .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 8pt;
+        }
+        
+        .summary-table td {
+            padding: 2px 4px;
+        }
+        
+        .summary-table td:first-child {
+            width: 70%;
+        }
+        
+        .summary-table td:last-child {
+            text-align: right;
+            font-weight: bold;
+        }
+        
+        .summary-total {
+            font-size: 12pt;
+            font-weight: bold;
+            color: #c00;
+            text-align: right;
+            border-top: 2px solid #000;
+            padding-top: 4px;
+            margin-top: 4px;
+        }
+        
+        /* THIRD PARTY */
+        .thirdparty-section {
+            margin-bottom: 8px;
+        }
+        
+        .thirdparty-title {
+            background: #e0e0e0;
+            padding: 3px 6px;
+            font-weight: bold;
+            font-size: 8pt;
+            margin-bottom: 4px;
+        }
+        
+        .thirdparty-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 8pt;
+        }
+        
+        .thirdparty-table th, .thirdparty-table td {
+            border: 1px solid #999;
+            padding: 3px 4px;
+        }
+        
+        .thirdparty-table th {
+            background: #f0f0f0;
+        }
+        
+        .thirdparty-table td:last-child {
+            text-align: right;
+        }
+        
+        /* FOOTER */
+        .footer-text {
+            font-size: 7pt;
+            text-align: center;
+            margin-top: 10px;
+            font-style: italic;
+        }
+        
+        .barcode-area {
+            text-align: center;
+            margin: 8px 0;
+            padding: 8px;
+            border: 1px dashed #999;
+        }
+        
+        .barcode-text {
+            font-family: "Courier New", monospace;
+            font-size: 10pt;
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- HEADER -->
+        <div class="header">
+            <div class="header-left">
+                <img src="assets/eeq_logo.png" alt="EEQ Logo" class="header-logo">
+                <div class="header-company">
+                    <h1>Empresa Eléctrica Quito S.A. E.E.Q.</h1>
+                    <p>Matriz: Bartolomé de las Casas E1-24 y Av. 10 de Agosto<br>
+                    RUC: 1790053881001<br>
+                    Contribuyente especial, resolución No. 5368<br>
+                    <strong>OBLIGADO A LLEVAR CONTABILIDAD</strong></p>
+                </div>
+            </div>
+            <div class="header-right">
+                <table>
+                    <tr>
+                        <td>Nro. Factura:</td>
+                        <td><strong>001-999-130293899</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Nro. doc. interno:</td>
+                        <td>003052851846</td>
+                    </tr>
+                    <tr>
+                        <td>Fecha de emisión:</td>
+                        <td><strong>17-10-2021</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Fecha de vencimiento:</td>
+                        <td>01-11-2021</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        
+        <!-- AUTHORIZATION -->
+        <div style="font-size: 7.5pt; margin-bottom: 6px;">
+            <strong>Número de autorización:</strong> 1705202601179005388100120019991302938990087109515
+        </div>
+        
+        <!-- FACTURA BOX -->
+        <div class="factura-box">
+            <div class="factura-box-left">
+                <p><span class="label">Código Único:</span> 1413M011000126</p>
+                <p><span class="label">Geocódigo:</span> 1413M011</p>
+                <p><span class="label">Código Postal:</span> 999999</p>
+            </div>
+            <div class="factura-box-right">
+                <div class="numero-factura">FACTURA</div>
+                <div class="valor-total">$ 498,56</div>
+            </div>
+        </div>
+        
+        <!-- CONSUMER INFO -->
+        <div class="consumer-section">
+            <div class="consumer-title">Información del Consumidor</div>
+            <div class="consumer-grid">
+                <table>
+                    <tr>
+                        <td>CUENTA CONTRATO:</td>
+                        <td><strong>200011945546</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Nombre Cliente:</td>
+                        <td><strong>INLIYAKU SA</strong></td>
+                    </tr>
+                    <tr>
+                        <td>RUC:</td>
+                        <td><strong>1792585902001</strong></td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td>Dirección del servicio:</td>
+                        <td><strong>San Francisco de Oyacoto S/N</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Tipo de tarifa Arconel:</td>
+                        <td>BTCRSD01 - BT Comercial</td>
+                    </tr>
+                    <tr>
+                        <td>Unidad de Lectura:</td>
+                        <td>1413M011</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        
+        <!-- SERVICE INFO -->
+        <div class="service-section">
+            <div class="service-header">1. Información Servicio Eléctrico y Alumbrado Público</div>
+            <div class="service-grid">
+                <div class="box">
+                    <div class="box-label">Número de medidor</div>
+                    <div class="box-value">200015248418</div>
+                </div>
+                <div class="box">
+                    <div class="box-label">Tipo consumo</div>
+                    <div class="box-value">leído</div>
+                </div>
+                <div class="box">
+                    <div class="box-label">Fecha desde</div>
+                    <div class="box-value">19-09-2021</div>
+                </div>
+                <div class="box">
+                    <div class="box-label">Fecha hasta</div>
+                    <div class="box-value">16-10-2021</div>
+                </div>
+            </div>
+            <div class="service-grid" style="grid-template-columns: repeat(5, 1fr); margin-top: 4px;">
+                <div class="box">
+                    <div class="box-label">Días facturados</div>
+                    <div class="box-value">28</div>
+                </div>
+                <div class="box">
+                    <div class="box-label">Lectura Actual</div>
+                    <div class="box-value">2376.00</div>
+                </div>
+                <div class="box">
+                    <div class="box-label">Lectura Anterior</div>
+                    <div class="box-value">2273.00</div>
+                </div>
+                <div class="box">
+                    <div class="box-label">Diferencia</div>
+                    <div class="box-value">103.00</div>
+                </div>
+                <div class="box">
+                    <div class="box-label">Consumo Total</div>
+                    <div class="box-value">103.00 KWH</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- CHARGES DETAIL -->
+        <div class="charges-section">
+            <div class="charges-title">Detalle de Consumo y Valores</div>
+            <table class="charges-table">
+                <tr>
+                    <th>Descripción</th>
+                    <th style="text-align:right;">Monto ($)</th>
+                </tr>
+                <tr>
+                    <td>Energía activa total</td>
+                    <td>8.20</td>
+                </tr>
+                <tr>
+                    <td>Comercialización</td>
+                    <td>1.41</td>
+                </tr>
+                <tr>
+                    <td>Subsidio Cruzado Beneficiado</td>
+                    <td>1.43</td>
+                </tr>
+                <tr>
+                    <td>Subsidio Tarifa Dignidad Comer.</td>
+                    <td>1.25</td>
+                </tr>
+                <tr>
+                    <td>Subsidio Tarifa Dignidad Ener.</td>
+                    <td>1.25</td>
+                </tr>
+                <tr>
+                    <td>Subtotal Servicio Eléctrico (SE)</td>
+                    <td>0.04</td>
+                </tr>
+                <tr>
+                    <td>Servicio Alumbrado Público</td>
+                    <td>2.85</td>
+                </tr>
+                <tr>
+                    <td>Subtotal Alumbrado Público</td>
+                    <td>2.83</td>
+                </tr>
+                <tr>
+                    <td>Intereses por Mora</td>
+                    <td>0.23</td>
+                </tr>
+                <tr>
+                    <td>Desconexión</td>
+                    <td>5.95</td>
+                </tr>
+                <tr>
+                    <td>Reconexión</td>
+                    <td>0.00</td>
+                </tr>
+                <tr>
+                    <td>Gastos notificación</td>
+                    <td>0.00</td>
+                </tr>
+                <tr>
+                    <td>Base I.V.A. 0%</td>
+                    <td>16.54</td>
+                </tr>
+                <tr>
+                    <td>I.V.A. 0%</td>
+                    <td>0.00</td>
+                </tr>
+                <tr>
+                    <td>Base Exento de IVA</td>
+                    <td>4.75</td>
+                </tr>
+                <tr>
+                    <td>Exento de IVA</td>
+                    <td>0.23</td>
+                </tr>
+                <tr>
+                    <td>Base I.V.A. 15%</td>
+                    <td>0.03</td>
+                </tr>
+                <tr>
+                    <td>I.V.A. 15%</td>
+                    <td>0.00</td>
+                </tr>
+                <tr class="total-row">
+                    <td><strong>TOTAL SE Y AP (1)</strong></td>
+                    <td><strong>483.62</strong></td>
+                </tr>
+            </table>
+        </div>
+        
+        <!-- PENDING VALUES -->
+        <div class="pending-section">
+            <div class="pending-title">2. Valores pendientes</div>
+            <table class="pending-table">
+                <tr>
+                    <th>Servicio Eléctrico y Alumbrado Público</th>
+                    <th style="text-align:right; width:30%;">VALORES PENDIENTES (2)</th>
+                </tr>
+                <tr>
+                    <td>Límite Tarifa Dignidad</td>
+                    <td>0.00</td>
+                </tr>
+                <tr>
+                    <td>Valores pendientes por pagar</td>
+                    <td>0.00</td>
+                </tr>
+            </table>
+        </div>
+        
+        <!-- PAYMENT PLANS -->
+        <div class="payment-section">
+            <div class="payment-title">3. Planes de Financiamiento Autorizados por el Consumidor</div>
+            <table class="payment-table">
+                <tr>
+                    <th>PLANES DE FINANCIAMIENTO (3)</th>
+                    <th style="text-align:right; width:30%;">0.00</th>
+                </tr>
+            </table>
+        </div>
+        
+        <!-- SUMMARY BOX -->
+        <div class="summary-box">
+            <div class="summary-box-title">RESUMEN DE VALORES</div>
+            <table class="summary-table">
+                <tr>
+                    <td>Total Sector Eléctrico (A)</td>
+                    <td>483.62</td>
+                </tr>
+                <tr>
+                    <td>Servicio Eléctrico y Alumbrado Público (1)</td>
+                    <td>483.62</td>
+                </tr>
+                <tr>
+                    <td>Valores Pendientes (2)</td>
+                    <td>0.00</td>
+                </tr>
+                <tr>
+                    <td>Planes de Financiamiento (3)</td>
+                    <td>0.00</td>
+                </tr>
+                <tr>
+                    <td><strong>TOTAL SECTOR ELÉCTRICO (A)</strong></td>
+                    <td><strong>483.62</strong></td>
+                </tr>
+                <tr>
+                    <td>Total Recaudación de Terceros (4+5+6)</td>
+                    <td>14.94</td>
+                </tr>
+            </table>
+            <div class="summary-total">
+                VALOR TOTAL (USD): $ 498,56
+            </div>
+        </div>
+        
+        <!-- THIRD PARTY -->
+        <div class="thirdparty-section">
+            <div class="thirdparty-title">Recaudación Terceros</div>
+            <div style="font-size: 7pt; margin-bottom: 4px; font-style: italic;">
+                ESTOS VALORES NO FORMAN PARTE DE LOS INGRESOS DE LA EMPRESA ELÉCTRICA
+            </div>
+            <div style="font-size: 8pt; font-weight: bold; margin-bottom: 4px;">
+                4. NOTIFICACIÓN DE PAGO DEL TRIBUTO PARA EL CUERPO DE BOMBEROS DEL CANTÓN QUITO
+            </div>
+            <table class="thirdparty-table">
+                <tr>
+                    <th>Beneficiario</th>
+                    <th style="width:25%;">C. BOMBEROS DISTRITO M QUITO</th>
+                </tr>
+                <tr>
+                    <td>R.U.C beneficiario.</td>
+                    <td>1768097950001</td>
+                </tr>
+                <tr>
+                    <td>Fecha de Emisión</td>
+                    <td>17-10-2021</td>
+                </tr>
+                <tr>
+                    <td>Cuenta Contrato</td>
+                    <td>200011945546</td>
+                </tr>
+                <tr>
+                    <td>RUC</td>
+                    <td>1792585902001</td>
+                </tr>
+                <tr>
+                    <td>Nombre</td>
+                    <td><strong>INLIYAKU SA</strong></td>
+                </tr>
+                <tr>
+                    <td>Dirección Servicio</td>
+                    <td>San Francisco de Oyacoto S/N</td>
+                </tr>
+                <tr>
+                    <th>CONCEPTO</th>
+                    <th style="text-align:right;">VALOR</th>
+                </tr>
+                <tr>
+                    <td>Contribución Bomberos</td>
+                    <td>14.94</td>
+                </tr>
+                <tr class="total-row">
+                    <td><strong>TOTAL CONTRIBUCIÓN BOMBEROS (4)</strong></td>
+                    <td><strong>14.94</strong></td>
+                </tr>
+            </table>
+        </div>
+        
+        <!-- FOOTER -->
+        <div class="footer-text">
+            "La presente factura no constituye título traslativo de dominio, sino únicamente la constancia de recibir un servicio público"
+        </div>
+        
+        <div style="margin-top: 10px; font-size: 7pt; text-align: center;">
+            En caso de reclamo o dudas comuníquese al teléfono de atención al cliente 023953700 o al mail comandancia@bomberosquito.gob.ec
+        </div>
+        
+        <!-- BARCODE AREA -->
+        <div class="barcode-area">
+            <div class="barcode-text">K200011945546</div>
+            <div style="font-size: 8pt; margin-top: 4px;">REF: INLIYAKU SA - OCT 2021</div>
+        </div>
+    </div>
+</body>
+</html>

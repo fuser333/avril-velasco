@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avril Velasco | Marketing Digital & Negocios Internacionales</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Montserrat:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --rose: #E8B4B8;
+            --cream: #FAF7F2;
+            --charcoal: #2C2C2C;
+            --warm-gray: #8A8A8A;
+            --sage: #9CAF88;
+            --terracotta: #C67B5C;
+            --deep-terracotta: #A65D3F;
+            --light-cream: #FFFCF8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--cream);
+            color: var(--charcoal);
+            overflow-x: hidden;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(60px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeLeft {
+            from { opacity: 0; transform: translateX(-80px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeRight {
+            from { opacity: 0; transform: translateX(80px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        @keyframes shimmer {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .mag-nav {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            padding: 1.5rem 4%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(250, 247, 242, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.4s ease;
+        }
+        .mag-nav.scrolled {
+            padding: 1rem 4%;
+            box-shadow: 0 2px 30px rgba(0,0,0,0.08);
+        }
+        .mag-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: 4px;
+            color: var(--charcoal);
+        }
+        .mag-nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+        .mag-nav-links a {
+            color: var(--charcoal);
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            transition: color 0.3s;
+        }
+        .mag-nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px; left: 0;
+            width: 0; height: 1px;
+            background: var(--gold);
+            transition: width 0.3s;
+        }
+        .mag-nav-links a:hover { color: var(--gold); }
+        .mag-nav-links a:hover::after { width: 100%; }
+        .mag-nav-cta {
+            padding: 0.7rem 1.8rem;
+            background: var(--charcoal);
+            color: var(--cream) !important;
+            border-radius: 0;
+            font-size: 0.7rem !important;
+            letter-spacing: 2px;
+            transition: all 0.3s;
+        }
+        .mag-nav-cta:hover {
+            background: var(--gold) !important;
+            color: var(--charcoal) !important;
+        }
+        .mag-nav-cta::after { display: none !important; }
+        .mobile-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .mag-hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            position: relative;
+        }
+        .mag-hero-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 8rem 6rem;
+            position: relative;
+            z-index: 2;
+        }
+        .mag-issue {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--warm-gray);
+            margin-bottom: 2rem;
+        }
+        .mag-hero-left h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 5rem;
+            font-weight: 300;
+            line-height: 1;
+            margin-bottom: 2rem;
+            color: var(--charcoal);
+        }
+        .mag-hero-left h1 em {
+            font-style: italic;
+            font-weight: 400;
+            color: var(--terracotta);
+        }
+        .mag-hero-left .subtitle {
+            font-size: 1.1rem;
+            color: var(--warm-gray);
+            line-height: 1.8;
+            margin-bottom: 3rem;
+            max-width: 420px;
+        }
+        .mag-hero-left .location {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 0.85rem;
+            color: var(--warm-gray);
+            margin-bottom: 3rem;
+        }
+        .mag-hero-left .location i { color: var(--terracotta); }
+        .mag-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 2.5rem;
+            background: var(--charcoal);
+            color: var(--cream);
+            text-decoration: none;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 500;
+            transition: all 0.4s;
+            width: fit-content;
+            border: 1px solid var(--charcoal);
+        }
+        .mag-cta:hover {
+            background: transparent;
+            color: var(--charcoal);
+            transform: translateX(10px);
+        }
+        .mag-cta i { transition: transform 0.3s; }
+        .mag-cta:hover i { transform: translateX(5px); }
+
+        .mag-hero-right {
+            position: relative;
+            overflow: hidden;
+        }
+        .mag-hero-image {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--rose), var(--sage), var(--terracotta));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            animation: shimmer 8s linear infinite;
+            background-size: 200% 200%;
+        }
+        .mag-hero-image::before {
+            content: '';
+            position: absolute;
+            inset: 40px;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        .mag-hero-image::after {
+            content: '';
+            position: absolute;
+            inset: 50px;
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+        .mag-hero-image .center-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 8rem;
+            font-weight: 300;
+            color: rgba(255,255,255,0.9);
+            line-height: 1;
+            text-align: center;
+            animation: float 6s ease-in-out infinite;
+        }
+        .mag-hero-image .center-text small {
+            display: block;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            margin-top: 1rem;
+            font-weight: 300;
+        }
+        .mag-hero-badge {
+            position: absolute;
+            bottom: 60px;
+            right: 60px;
+            background: rgba(255,255,255,0.9);
+            padding: 1.5rem 2rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        .mag-hero-badge .label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--warm-gray);
+            margin-bottom: 0.5rem;
+        }
+        .mag-hero-badge .value {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--charcoal);
+        }
+
+        .mag-section {
+            padding: 10rem 6rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .mag-section-header {
+            text-align: center;
+            margin-bottom: 6rem;
+        }
+        .mag-section-header .label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+        }
+        .mag-section-header h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            font-weight: 300;
+            line-height: 1.1;
+        }
+        .mag-section-header h2 em {
+            font-style: italic;
+            color: var(--terracotta);
+        }
+        .mag-section-header p {
+            color: var(--warm-gray);
+            max-width: 600px;
+            margin: 1.5rem auto 0;
+            line-height: 1.8;
+        }
+
+        .mag-about {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 6rem;
+            align-items: center;
+            padding: 0 6rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .mag-about-image {
+            position: relative;
+        }
+        .mag-about-image-main {
+            width: 100%;
+            aspect-ratio: 3/4;
+            background: linear-gradient(135deg, var(--rose), #D4A5A5, var(--terracotta));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .mag-about-image-main::before {
+            content: '';
+            position: absolute;
+            inset: 30px;
+            border: 1px solid rgba(255,255,255,0.4);
+        }
+        .mag-about-image-main::after {
+            content: '';
+            position: absolute;
+            inset: 40px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .mag-about-image-main span {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 6rem;
+            color: rgba(255,255,255,0.9);
+            z-index: 2;
+            animation: float 5s ease-in-out infinite;
+        }
+        .mag-about-image-overlay {
+            position: absolute;
+            bottom: -30px;
+            right: -30px;
+            background: var(--charcoal);
+            color: var(--cream);
+            padding: 2rem;
+            max-width: 280px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        .mag-about-image-overlay .quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        .mag-about-image-overlay .author {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 1rem;
+            opacity: 0.7;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .mag-about-content .tag {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--gold);
+            margin-bottom: 2rem;
+        }
+        .mag-about-content h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 300;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+        }
+        .mag-about-content h3 em {
+            font-style: italic;
+            color: var(--terracotta);
+        }
+        .mag-about-content p {
+            color: var(--warm-gray);
+            line-height: 2;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+        .mag-about-content .highlight {
+            color: var(--charcoal);
+            font-weight: 500;
+        }
+        .mag-about-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(0,0,0,0.08);
+        }
+        .mag-about-stat {
+            text-align: center;
+        }
+        .mag-about-stat .num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--terracotta);
+        }
+        .mag-about-stat .txt {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--warm-gray);
+            margin-top: 0.3rem;
+        }
+
+        .mag-depts {
+            background: var(--charcoal);
+            color: var(--cream);
+            padding: 10rem 6rem;
+        }
+        .mag-depts-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .mag-depts-header {
+            text-align: center;
+            margin-bottom: 6rem;
+        }
+        .mag-depts-header .label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+        }
+        .mag-depts-header h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            font-weight: 300;
+        }
+        .mag-depts-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            background: rgba(255,255,255,0.1);
+        }
+        .mag-dept-item {
+            background: var(--charcoal);
+            padding: 2.5rem 2rem;
+            transition: all 0.4s;
+            cursor: pointer;
+        }
+        .mag-dept-item:hover {
+            background: rgba(255,255,255,0.05);
+        }
+        .mag-dept-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            opacity: 0.5;
+            transition: opacity 0.3s;
+        }
+        .mag-dept-item:hover .mag-dept-num {
+            opacity: 1;
+        }
+        .mag-dept-item h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+            letter-spacing: 1px;
+        }
+        .mag-dept-item p {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.5);
+            line-height: 1.7;
+        }
+
+        .mag-experience {
+            padding: 10rem 6rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .mag-exp-header {
+            text-align: center;
+            margin-bottom: 6rem;
+        }
+        .mag-exp-header .label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+        }
+        .mag-exp-header h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            font-weight: 300;
+        }
+        .mag-exp-timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .mag-exp-timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: linear-gradient(to bottom, var(--gold), var(--terracotta));
+        }
+        .mag-exp-item {
+            position: relative;
+            padding-left: 3rem;
+            padding-bottom: 4rem;
+        }
+        .mag-exp-item::before {
+            content: '';
+            position: absolute;
+            left: -5px;
+            top: 0.5rem;
+            width: 11px;
+            height: 11px;
+            background: var(--gold);
+            border-radius: 50%;
+        }
+        .mag-exp-item .date {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+        .mag-exp-item h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .mag-exp-item .company {
+            font-size: 0.9rem;
+            color: var(--terracotta);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        .mag-exp-item ul {
+            list-style: none;
+            color: var(--warm-gray);
+            font-size: 0.95rem;
+            line-height: 2;
+        }
+        .mag-exp-item ul li::before {
+            content: '— ';
+            color: var(--gold);
+        }
+
+        .mag-portfolio {
+            padding: 10rem 6rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .mag-portfolio-header {
+            text-align: center;
+            margin-bottom: 6rem;
+        }
+        .mag-portfolio-header .label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+        }
+        .mag-portfolio-header h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            font-weight: 300;
+        }
+        .mag-portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-auto-rows: 300px;
+            gap: 1.5rem;
+        }
+        .mag-port-item {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .mag-port-item:nth-child(1) { grid-column: span 7; }
+        .mag-port-item:nth-child(2) { grid-column: span 5; }
+        .mag-port-item:nth-child(3) { grid-column: span 5; }
+        .mag-port-item:nth-child(4) { grid-column: span 7; }
+        .mag-port-item:nth-child(5) { grid-column: span 6; }
+        .mag-port-item:nth-child(6) { grid-column: span 6; }
+        .mag-port-item .port-bg {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .mag-port-item:hover .port-bg {
+            transform: scale(1.05);
+        }
+        .mag-port-item .port-overlay {
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 100%;
+            padding: 2rem;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.4s;
+        }
+        .mag-port-item:hover .port-overlay {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .mag-port-item .port-overlay h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        .mag-port-item .port-overlay p {
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+        .mag-port-item .port-tag {
+            position: absolute;
+            top: 1.5rem;
+            left: 1.5rem;
+            padding: 0.4rem 1rem;
+            background: rgba(255,255,255,0.9);
+            color: var(--charcoal);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 500;
+        }
+
+        .mag-skills {
+            background: linear-gradient(135deg, var(--rose), #D4A5A5);
+            padding: 8rem 6rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .mag-skills::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            animation: rotateSlow 30s linear infinite;
+        }
+        @keyframes rotateSlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .mag-skills-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        .mag-skills-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        .mag-skills-header h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 300;
+            color: white;
+        }
+        .mag-skills-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+        .mag-skill-card {
+            background: rgba(255,255,255,0.9);
+            padding: 2.5rem 2rem;
+            text-align: center;
+            transition: all 0.4s;
+        }
+        .mag-skill-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        .mag-skill-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .mag-skill-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--charcoal);
+        }
+        .mag-skill-card p {
+            font-size: 0.85rem;
+            color: var(--warm-gray);
+            line-height: 1.7;
+        }
+        .mag-skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+        .mag-skill-tags span {
+            padding: 0.25rem 0.75rem;
+            background: rgba(212,175,55,0.1);
+            border: 1px solid rgba(212,175,55,0.2);
+            border-radius: 50px;
+            font-size: 0.7rem;
+            color: var(--gold);
+        }
+
+        .mag-contact {
+            background: var(--charcoal);
+            color: var(--cream);
+            padding: 10rem 6rem;
+            text-align: center;
+        }
+        .mag-contact-inner {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .mag-contact .label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--gold);
+            margin-bottom: 2rem;
+        }
+        .mag-contact h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4.5rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            line-height: 1.1;
+        }
+        .mag-contact h2 em {
+            font-style: italic;
+            color: var(--rose);
+        }
+        .mag-contact p {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.8;
+            margin-bottom: 3rem;
+        }
+        .mag-contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+        .mag-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: rgba(255,255,255,0.7);
+            font-size: 0.95rem;
+        }
+        .mag-contact-item i {
+            color: var(--gold);
+        }
+        .mag-contact-btn {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            transition: all 0.4s;
+            background: transparent;
+            cursor: pointer;
+        }
+        .mag-contact-btn:hover {
+            background: var(--gold);
+            color: var(--charcoal);
+        }
+        .mag-social {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+        .mag-social a {
+            width: 50px; height: 50px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255,255,255,0.6);
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        .mag-social a:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            transform: translateY(-3px);
+        }
+
+        .mag-footer {
+            padding: 3rem 6rem;
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--warm-gray);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+        .mag-footer .heart {
+            color: var(--terracotta);
+        }
+
+        .sr {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .sr.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .sr-left {
+            opacity: 0;
+            transform: translateX(-60px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .sr-left.revealed {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .sr-right {
+            opacity: 0;
+            transform: translateX(60px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .sr-right.revealed {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .sr-scale {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .sr-scale.revealed {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        @media (max-width: 1024px) {
+            .mag-hero { grid-template-columns: 1fr; }
+            .mag-hero-right { min-height: 50vh; }
+            .mag-about { grid-template-columns: 1fr; }
+            .mag-depts-grid { grid-template-columns: repeat(2, 1fr); }
+            .mag-portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+            .mag-port-item:nth-child(n) { grid-column: span 1; }
+            .mag-skills-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .mag-nav-links { display: none; }
+            .mobile-toggle { display: block; }
+            .mag-hero-left { padding: 6rem 2rem; }
+            .mag-hero-left h1 { font-size: 3rem; }
+            .mag-section, .mag-depts, .mag-portfolio, .mag-contact, .mag-skills, .mag-experience { padding: 5rem 2rem; }
+            .mag-depts-grid { grid-template-columns: 1fr; }
+            .mag-portfolio-grid { grid-template-columns: 1fr; grid-auto-rows: 250px; }
+            .mag-about { padding: 0 2rem; }
+            .mag-skills-grid { grid-template-columns: 1fr; }
+            .mag-contact h2 { font-size: 2.5rem; }
+            .mag-about-stats { grid-template-columns: 1fr; }
+            .mag-exp-timeline::before { display: none; }
+            .mag-exp-item { padding-left: 0; }
+            .mag-exp-item::before { display: none; }
+            .mag-contact-info { gap: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="mag-nav" id="navbar">
+        <div class="mag-logo">AVRiL</div>
+        <ul class="mag-nav-links">
+            <li><a href="#about">Sobre Mí</a></li>
+            <li><a href="#experience">Experiencia</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact" class="mag-nav-cta">Hablemos</a></li>
+        </ul>
+        <div class="mobile-toggle" onclick="document.querySelector('.mag-nav-links').classList.toggle('active')">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="mag-hero">
+        <div class="mag-hero-left">
+            <div class="mag-issue">The Creative Issue · Vol. 1 · 2025</div>
+            <h1>
+                Creo<br>
+                <em>contenido</em><br>
+                que conecta
+            </h1>
+            <p class="subtitle">
+                Marketing digital, producción audiovisual y negocios internacionales. 
+                Experiencia real en Ecuador, Colombia y USA.
+            </p>
+            <div class="location">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Quito, Ecuador · Negocios Internacionales USFQ · 5to semestre</span>
+            </div>
+            <a href="#portfolio" class="mag-cta">
+                Ver Mi Trabajo <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+        <div class="mag-hero-right">
+            <div class="mag-hero-image">
+                <div class="center-text">
+                    🌸
+                    <small>Latina Power</small>
+                </div>
+                <div class="mag-hero-badge">
+                    <div class="label">Disponible</div>
+                    <div class="value">Community Manager & Marketing</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="mag-about" id="about">
+        <div class="mag-about-image sr-left">
+            <div class="mag-about-image-main">
+                <span>👩🏻‍💻</span>
+            </div>
+            <div class="mag-about-image-overlay">
+                <div class="quote">"Si no te han bloqueado de una red social, es que no has creado contenido suficiente."</div>
+                <div class="author">— Avril Velasco</div>
+            </div>
+        </div>
+        <div class="mag-about-content sr-right">
+            <div class="tag">Sobre Mí</div>
+            <h3>
+                La mezcla perfecta entre <em>creatividad</em> y <em>estrategia</em>
+            </h3>
+            <p>
+                Soy <span class="highlight">ecuatoriana 100%</span>, nacida y criada en Quito. Estudio 
+                <strong>Negocios Internacionales</strong> en la Universidad San Francisco de Quito, 
+                combinando visión estratégica de negocios con habilidades creativas de diseño.
+            </p>
+            <p>
+                Actualmente trabajo como <strong>Community Manager y Marketing Digital</strong> en 
+                <strong>Growix</strong>, una empresa de importación con operaciones en Ecuador, Colombia y USA. 
+                Gestión de redes sociales, creación de contenido estratégico y mejora de la experiencia del cliente.
+            </p>
+            <p>
+                Cuando no estoy ideando campañas, estoy escuchando <strong>Bad Bunny</strong>, 
+                creando videos en CapCut, o diseñando en Canva, Illustrator y Photoshop.
+            </p>
+            <div class="mag-about-stats">
+                <div class="mag-about-stat">
+                    <div class="num">USFQ</div>
+                    <div class="txt">Negocios Internacionales</div>
+                </div>
+                <div class="mag-about-stat">
+                    <div class="num">B2</div>
+                    <div class="txt">Inglés</div>
+                </div>
+                <div class="mag-about-stat">
+                    <div class="num">5to</div>
+                    <div class="txt">Semestre</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience -->
+    <section class="mag-experience" id="experience">
+        <div class="mag-exp-header sr">
+            <div class="label">Trayectoria</div>
+            <h2>Experiencia Profesional</h2>
+        </div>
+        <div class="mag-exp-timeline">
+            <div class="mag-exp-item sr">
+                <div class="date">Actualidad — Presente</div>
+                <h3>Community Manager / Marketing Digital</h3>
+                <div class="company">Growix · Ecuador / Colombia / USA</div>
+                <ul>
+                    <li>Gestión de redes sociales y atención a clientes en mercados de Ecuador y Colombia</li>
+                    <li>Creación de contenido estratégico enfocado en engagement y conversión</li>
+                    <li>Participación en mejora de procesos de comunicación y experiencia del cliente</li>
+                    <li>Coordinación de campañas digitales para líneas de repuestos automotrices, retail y Trendverse</li>
+                </ul>
+            </div>
+            <div class="mag-exp-item sr">
+                <div class="date">Experiencia previa</div>
+                <h3>Atención al Cliente / Supply Chain</h3>
+                <div class="company">Growix · Colombia</div>
+                <ul>
+                    <li>Comunicación con clientes sobre pedidos y procesos logísticos internacionales</li>
+                    <li>Seguimiento de envíos y resolución de incidencias de importación</li>
+                    <li>Coordinación para mejorar tiempos de respuesta y satisfacción del cliente</li>
+                </ul>
+            </div>
+            <div class="mag-exp-item sr">
+                <div class="date">Experiencia previa</div>
+                <h3>Expositora</h3>
+                <div class="company">Feria Expo Calidad Educativa · Liceo BYS / ITSEIA</div>
+                <ul>
+                    <li>Presentación de programas educativos a potenciales clientes</li>
+                    <li>Explicación clara de servicios, generando interés y confianza</li>
+                    <li>Interacción con alto volumen de personas en eventos presenciales</li>
+                </ul>
+            </div>
+            <!-- Arquitectura omitida a solicitud - enfoque 100% marketing -->
+        </div>
+    </section>
+
+    <!-- Departments -->
+    <section class="mag-depts" id="depts">
+        <div class="mag-depts-inner">
+            <div class="mag-depts-header sr">
+                <div class="label">Conocimientos</div>
+                <h2>18 Áreas de Expertise</h2>
+            </div>
+            <div class="mag-depts-grid">
+                <div class="mag-dept-item sr-scale"><div class="mag-dept-num">01</div><h3>Marketing y Ventas</h3><p>Estrategias de contenido, branding, copywriting y generación de leads.</p></div>
+                <div class="mag-dept-item sr-scale"><div class="mag-dept-num">02</div><h3>Estrategia y Planificación</h3><p>OKRs, planificación de campañas, roadmap de crecimiento.</p></div>
+                <div class="mag-dept-item sr-scale"><div class="mag-dept-num">03</div><h3>Operaciones y Logística</h3><p>Gestión de supply chain, importaciones, coordinación logística.</p></div>
+                <div class="mag-dept-item sr-scale"><div class="mag-dept-num">04</div><h3>Análisis de Mercado</h3><p>Investigación de mercados EC, CO, USA. Insights de competencia.</p></div>
+                <div class="mag-dept-item sr-scale"><div class="mag-dept-num">05</div><h3>Recursos Humanos</h3><p>CV profesional, LinkedIn, preparación para entrevistas.</p></div>
+                <div class="mag-dept-item sr-scale"><div class="mag-dept-num">06</div><h3>Finanzas y Contabilidad</h3><p>Presupuestos, ROI, análisis de rentabilidad.</p></div>
+                <div class="mag-dept-item sr-scale"><div class="mag-dept-num">07</div><h3>Legal y Regulaciones</h3><p>Comercio internacional, TLC Ecuador-China, normativa aduanera.</p></div>
+                <div class="mag-dept-item sr-scale"><div class="mag-dept-num">08</div><h3>Tecnología e Innovación</h3><p>Canva, CapCut, AutoCAD, Illustrator, Photoshop, Metricool.</p></div>
+                <div class="mag-dept-item sr-scale"><div class="mag-dept-num">09</div><h3>Atención al Cliente</h3><p>CX, resolución de incidencias, comunicación multicultural.</p></div>
+                <div class="mag-dept-item sr-scale"><div class="mag-dept-num">10</div><h3>Inteligencia Artificial</h3><p>ChatGPT, Claude, prompts, automatización de contenido.</p></div>
+                <div class="mag-dept-item sr-scale"><div class="mag-dept-num">11</div><h3>Datos Gubernamentales</h3><p>INEC, BCE, MIPRO, regulaciones de comercio exterior.</p></div>
+                <div class="mag-dept-item sr-scale"><div class="mag-dept-num">12</div><h3>Predicciones y Prospectivo</h3><p>Tendencias de e-commerce, importaciones, marketing digital.</p></div>
+                <div class="mag-dept-item sr-scale"><div class="mag-dept-num">13</div><h3>Gestión de Crisis</h3><p>Resiliencia, manejo de quejas, protocolos de servicio.</p></div>
+                <div class="mag-dept-item sr-scale"><div class="mag-dept-num">14</div><h3>Sostenibilidad y ESG</h3><p>Comercio responsable, ética empresarial, propósito.</p></div>
+                <div class="mag-dept-item sr-scale"><div class="mag-dept-num">15</div><h3>Control Integral</h3><p>KPIs de engagement, métricas de redes, dashboards.</p></div>
+                <div class="mag-dept-item sr-scale"><div class="mag-dept-num">16</div><h3>Política de Empresa</h3><p>Código de conducta, valores, integridad profesional.</p></div>
+                <div class="mag-dept-item sr-scale"><div class="mag-dept-num">17</div><h3>Empresas Familiares</h3><p>Dinámicas organizacionales, gobernanza, protocolos.</p></div>
+                <div class="mag-dept-item sr-scale"><div class="mag-dept-num">18</div><h3>Escenario de Negocios</h3><p>E-commerce, importación, retail, comercio internacional.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio -->
+    <section class="mag-portfolio" id="portfolio">
+        <div class="mag-portfolio-header sr">
+            <div class="label">Trabajo Real</div>
+            <h2>Proyectos Destacados</h2>
+        </div>
+        <div class="mag-portfolio-grid">
+            <div class="mag-port-item sr">
+                <div class="port-tag">Growix · Social Media</div>
+                <div class="port-bg" style="background: linear-gradient(135deg, #E8B4B8, #D4A5A5);">📱</div>
+                <div class="port-overlay">
+                    <h3>Gestión de Redes Sociales — Growix</h3>
+                    <p>Creación de contenido estratégico para mercados de Ecuador y Colombia. Gestión de comunidad y engagement.</p>
+                </div>
+            </div>
+            <div class="mag-port-item sr">
+                <div class="port-tag">Predios Ecuador · Video</div>
+                <div class="port-bg" style="background: linear-gradient(135deg, #9CAF88, #7A9A6D);">🎬</div>
+                <div class="port-overlay">
+                    <h3>Contenido Multimedia — Predios Ecuador</h3>
+                    <p>Producción de contenido para Instagram, YouTube Shorts y YouTube. Formats 1080x1080, 1080x1920 y 1280x720.</p>
+                </div>
+            </div>
+            <div class="mag-port-item sr">
+                <div class="port-tag">Expo · Eventos</div>
+                <div class="port-bg" style="background: linear-gradient(135deg, #C67B5C, #A65D3F);">🎤</div>
+                <div class="port-overlay">
+                    <h3>Expositora — Expo Calidad Educativa</h3>
+                    <p>Presentación de programas educativos. Interacción con alto volumen de personas en eventos presenciales.</p>
+                </div>
+            </div>
+            <div class="mag-port-item sr">
+                <div class="port-tag">Growix · Supply Chain</div>
+                <div class="port-bg" style="background: linear-gradient(135deg, #D4AF37, #B8941F);">📦</div>
+                <div class="port-overlay">
+                    <h3>Supply Chain & Logística — Growix Colombia</h3>
+                    <p>Seguimiento de envíos internacionales, resolución de incidencias, coordinación de importaciones.</p>
+                </div>
+            </div>
+            <div class="mag-port-item sr">
+                <div class="port-tag">Diseño · Contenido</div>
+                <div class="port-bg" style="background: linear-gradient(135deg, #2C2C2C, #4A4A4A);">🎨</div>
+                <div class="port-overlay">
+                    <h3>Diseño Gráfico & Contenido</h3>
+                    <p>Creación de piezas visuales con Photoshop, Illustrator y Canva para redes sociales y marketing.</p>
+                </div>
+            </div>
+            <div class="mag-port-item sr">
+                <div class="port-tag">Trendverse · E-commerce</div>
+                <div class="port-bg" style="background: linear-gradient(135deg, #8B7D6B, #6B5D4F);">🛒</div>
+                <div class="port-overlay">
+                    <h3>E-commerce & Trendverse</h3>
+                    <p>Apoyo en estrategias de venta online, catálogo de productos virales y gestión de marketplace.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills -->
+    <section class="mag-skills" id="skills">
+        <div class="mag-skills-inner">
+            <div class="mag-skills-header sr">
+                <h2>Habilidades Técnicas</h2>
+            </div>
+            <div class="mag-skills-grid">
+                <div class="mag-skill-card sr">
+                    <div class="icon">🎨</div>
+                    <h3>Diseño</h3>
+                    <p>Adobe Photoshop, Illustrator, Canva Pro</p>
+                    <div class="mag-skill-tags">
+                        <span>Photoshop</span>
+                        <span>Illustrator</span>
+                        <span>Canva</span>
+                    </div>
+                </div>
+                <div class="mag-skill-card sr">
+                    <div class="icon">🎬</div>
+                    <h3>Video</h3>
+                    <p>CapCut, edición de contenido short-form</p>
+                    <div class="mag-skill-tags">
+                        <span>CapCut</span>
+                        <span>Reels</span>
+                        <span>Shorts</span>
+                    </div>
+                </div>
+                <div class="mag-skill-card sr">
+                    <div class="icon">📐</div>
+                    <h3>Diseño Técnico</h3>
+                    <p>AutoCAD, manejo de planos, documentación visual técnica</p>
+                    <div class="mag-skill-tags">
+                        <span>AutoCAD</span>
+                        <span>Diseño</span>
+                        <span>Técnico</span>
+                    </div>
+                </div>
+                <div class="mag-skill-card sr">
+                    <div class="icon">💬</div>
+                    <h3>Idiomas</h3>
+                    <p>Español nativo, Inglés B2. Experiencia multicultural.</p>
+                    <div class="mag-skill-tags">
+                        <span>Español</span>
+                        <span>Inglés B2</span>
+                        <span>Multicultural</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="mag-contact" id="contact">
+        <div class="mag-contact-inner sr">
+            <div class="label">Contacto</div>
+            <h2>
+                ¿Creamos algo<br>
+                <em>épico</em> juntos?
+            </h2>
+            <p>
+                Estoy buscando nuevas oportunidades donde pueda aportar mi experiencia en 
+                marketing digital, comunidad y creación de contenido. Disponible para proyectos 
+                en Ecuador y de forma remota.
+            </p>
+            <div class="mag-contact-info">
+                <div class="mag-contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>avrilvelasco@gmail.com</span>
+                </div>
+                <div class="mag-contact-item">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>099 956 8215</span>
+                </div>
+                <div class="mag-contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Quito, Ecuador</span>
+                </div>
+            </div>
+            <a href="mailto:avrilvelasco@gmail.com" class="mag-contact-btn">Enviar Email</a>
+            <div class="mag-social">
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+                <a href="#"><i class="fab fa-behance"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="mag-footer">
+        © 2025 Avril Velasco · Quito, Ecuador <span class="heart">🇪🇨</span> · "Si yo quiero un baby, tú me das un baby..." 🐰
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('revealed');
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.sr, .sr-left, .sr-right, .sr-scale').forEach(el => observer.observe(el));
+
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) nav.classList.add('scrolled');
+            else nav.classList.remove('scrolled');
+        });
+    </script>
+</body>
+</html>

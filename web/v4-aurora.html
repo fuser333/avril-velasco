@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✨ Avril Velasco | Aurora Edition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --deep: #0f0f1a;
+            --night: #1a1a2e;
+            --aurora-green: #00ff9d;
+            --aurora-blue: #00d4ff;
+            --aurora-purple: #b829dd;
+            --aurora-pink: #ff6b9d;
+            --aurora-yellow: #ffd700;
+            --text: #e8e8f0;
+            --text-dim: #8899a6;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--deep);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* ===== AURORA CANVAS ===== */
+        #aurora-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* ===== FLOATING BLOBS ===== */
+        .blob {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            z-index: 0;
+            pointer-events: none;
+            animation: blobFloat 15s ease-in-out infinite;
+        }
+        .blob-1 { width: 500px; height: 500px; background: var(--aurora-green); top: -10%; left: -10%; animation-delay: 0s; }
+        .blob-2 { width: 400px; height: 400px; background: var(--aurora-purple); bottom: -10%; right: -10%; animation-delay: -5s; }
+        .blob-3 { width: 300px; height: 300px; background: var(--aurora-blue); top: 40%; left: 60%; animation-delay: -10s; }
+        .blob-4 { width: 350px; height: 350px; background: var(--aurora-pink); top: 60%; left: 20%; animation-delay: -7s; }
+
+        @keyframes blobFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(50px, -30px) scale(1.1); }
+            50% { transform: translate(-30px, 50px) scale(0.9); }
+            75% { transform: translate(30px, 30px) scale(1.05); }
+        }
+
+        /* ===== GLASS NAV ===== */
+        .aurora-nav {
+            position: fixed;
+            top: 0; width: 100%;
+            padding: 1.2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(15, 15, 26, 0.4);
+            backdrop-filter: blur(30px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .aurora-logo {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            background: linear-gradient(135deg, var(--aurora-green), var(--aurora-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .aurora-nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+        .aurora-nav-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            position: relative;
+        }
+        .aurora-nav-links a:hover {
+            color: var(--aurora-green);
+        }
+        .aurora-nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px; left: 0;
+            width: 0; height: 2px;
+            background: linear-gradient(90deg, var(--aurora-green), var(--aurora-blue));
+            transition: width 0.3s;
+            border-radius: 2px;
+        }
+        .aurora-nav-links a:hover::after { width: 100%; }
+
+        /* ===== HERO AURORA ===== */
+        .aurora-hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+            padding: 0 5%;
+            text-align: center;
+        }
+        .aurora-hero-content {
+            max-width: 900px;
+        }
+        .aurora-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.5rem;
+            background: rgba(0, 255, 157, 0.1);
+            border: 1px solid rgba(0, 255, 157, 0.2);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            color: var(--aurora-green);
+            margin-bottom: 2.5rem;
+            backdrop-filter: blur(10px);
+        }
+        .aurora-badge .pulse-dot {
+            width: 8px; height: 8px;
+            background: var(--aurora-green);
+            border-radius: 50%;
+            animation: pulse-dot 2s ease infinite;
+        }
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.3); }
+        }
+        .aurora-hero h1 {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 4rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            letter-spacing: -2px;
+        }
+        .aurora-hero h1 .gradient {
+            background: linear-gradient(135deg, var(--aurora-green), var(--aurora-blue), var(--aurora-purple), var(--aurora-pink));
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 5s ease infinite;
+        }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .aurora-hero-sub {
+            font-size: 1.3rem;
+            color: var(--text-dim);
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+        .aurora-hero-vibe {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+        .aurora-hero-vibe .wave-bar {
+            display: flex;
+            align-items: flex-end;
+            gap: 3px;
+            height: 25px;
+        }
+        .aurora-hero-vibe .wave-bar span {
+            width: 3px;
+            background: linear-gradient(to top, var(--aurora-green), var(--aurora-blue));
+            border-radius: 3px;
+            animation: waveBar 1s ease infinite;
+        }
+        .aurora-hero-vibe .wave-bar span:nth-child(1) { height: 8px; animation-delay: 0s; }
+        .aurora-hero-vibe .wave-bar span:nth-child(2) { height: 18px; animation-delay: 0.1s; }
+        .aurora-hero-vibe .wave-bar span:nth-child(3) { height: 12px; animation-delay: 0.2s; }
+        .aurora-hero-vibe .wave-bar span:nth-child(4) { height: 22px; animation-delay: 0.15s; }
+        .aurora-hero-vibe .wave-bar span:nth-child(5) { height: 10px; animation-delay: 0.25s; }
+        @keyframes waveBar {
+            0%, 100% { transform: scaleY(0.5); }
+            50% { transform: scaleY(1); }
+        }
+        .aurora-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn-aurora {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.4s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .btn-aurora-primary {
+            background: linear-gradient(135deg, rgba(0,255,157,0.2), rgba(0,212,255,0.2));
+            color: white;
+            border-color: rgba(0,255,157,0.3);
+        }
+        .btn-aurora-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,255,157,0.3);
+            border-color: var(--aurora-green);
+        }
+        .btn-aurora-outline {
+            background: rgba(255,255,255,0.05);
+            color: var(--text);
+        }
+        .btn-aurora-outline:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-3px);
+        }
+
+        /* ===== GLASS SECTIONS ===== */
+        .aurora-section {
+            position: relative;
+            z-index: 1;
+            padding: 8rem 5%;
+        }
+        .aurora-section-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .aurora-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+        .aurora-header .tag {
+            display: inline-block;
+            padding: 0.4rem 1.2rem;
+            background: rgba(0, 255, 157, 0.08);
+            border: 1px solid rgba(0, 255, 157, 0.15);
+            border-radius: 50px;
+            font-size: 0.75rem;
+            color: var(--aurora-green);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 1.5rem;
+        }
+        .aurora-header h2 {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+        .aurora-header p {
+            color: var(--text-dim);
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* ===== ABOUT AURORA ===== */
+        .aurora-about {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+        .aurora-about-visual {
+            position: relative;
+        }
+        .aurora-glass-card {
+            background: rgba(255,255,255,0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 30px;
+            padding: 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .aurora-glass-card::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(0,255,157,0.1), transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        .aurora-glass-card .icon {
+            font-size: 5rem;
+            position: relative;
+            z-index: 2;
+        }
+        .aurora-glass-card .badges {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-top: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+        .aurora-glass-card .badge {
+            padding: 0.5rem 1rem;
+            background: rgba(0,255,157,0.1);
+            border: 1px solid rgba(0,255,157,0.2);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            color: var(--aurora-green);
+        }
+        .aurora-about-content h3 {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.3;
+        }
+        .aurora-about-content h3 .highlight {
+            background: linear-gradient(135deg, var(--aurora-green), var(--aurora-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .aurora-about-content p {
+            color: var(--text-dim);
+            line-height: 2;
+            margin-bottom: 1.2rem;
+            font-size: 1.05rem;
+        }
+        .aurora-about-content .quote {
+            padding: 1.5rem 2rem;
+            background: rgba(0,255,157,0.05);
+            border-left: 3px solid var(--aurora-green);
+            border-radius: 0 15px 15px 0;
+            margin: 2rem 0;
+            font-style: italic;
+            color: var(--text);
+        }
+
+        /* ===== DEPARTMENTS AURORA ===== */
+        .aurora-depts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        .aurora-dept-card {
+            background: rgba(255,255,255,0.02);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 24px;
+            padding: 2rem;
+            transition: all 0.5s;
+            position: relative;
+            overflow: hidden;
+        }
+        .aurora-dept-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 3px;
+            background: linear-gradient(90deg, var(--aurora-green), var(--aurora-blue), var(--aurora-purple));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s;
+        }
+        .aurora-dept-card:hover::before { transform: scaleX(1); }
+        .aurora-dept-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(0,255,157,0.2);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+        }
+        .aurora-dept-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+        .aurora-dept-num {
+            font-size: 0.75rem;
+            color: var(--aurora-green);
+            font-weight: 700;
+            background: rgba(0,255,157,0.1);
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+        }
+        .aurora-dept-icon { font-size: 2rem; }
+        .aurora-dept-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+        .aurora-dept-card p {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+        .aurora-dept-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1.2rem;
+        }
+        .aurora-dept-skills span {
+            padding: 0.3rem 0.8rem;
+            background: rgba(0,255,157,0.06);
+            border: 1px solid rgba(0,255,157,0.12);
+            border-radius: 50px;
+            font-size: 0.75rem;
+            color: var(--aurora-green);
+        }
+
+        /* ===== PORTFOLIO AURORA ===== */
+        .aurora-portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        .aurora-port-card {
+            background: rgba(255,255,255,0.02);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 24px;
+            overflow: hidden;
+            transition: all 0.5s;
+        }
+        .aurora-port-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+            border-color: rgba(0,255,157,0.15);
+        }
+        .aurora-port-img {
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .aurora-port-img::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent, var(--deep));
+        }
+        .aurora-port-content {
+            padding: 1.8rem;
+        }
+        .aurora-port-content h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+        .aurora-port-content p {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+        .aurora-port-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .aurora-port-tags span {
+            padding: 0.3rem 0.8rem;
+            background: rgba(0,212,255,0.06);
+            border: 1px solid rgba(0,212,255,0.12);
+            border-radius: 50px;
+            font-size: 0.75rem;
+            color: var(--aurora-blue);
+        }
+
+        /* ===== CONTACT AURORA ===== */
+        .aurora-contact {
+            text-align: center;
+        }
+        .aurora-contact h2 {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+        .aurora-contact h2 .gradient {
+            background: linear-gradient(135deg, var(--aurora-green), var(--aurora-blue), var(--aurora-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .aurora-contact p {
+            color: var(--text-dim);
+            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .aurora-social {
+            display: flex;
+            justify-content: center;
+            gap: 1.2rem;
+            margin-top: 2.5rem;
+        }
+        .aurora-social a {
+            width: 55px; height: 55px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text);
+            font-size: 1.3rem;
+            transition: all 0.3s;
+            text-decoration: none;
+            backdrop-filter: blur(10px);
+        }
+        .aurora-social a:hover {
+            background: rgba(0,255,157,0.1);
+            border-color: var(--aurora-green);
+            color: var(--aurora-green);
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 30px rgba(0,255,157,0.2);
+        }
+
+        /* ===== FOOTER ===== */
+        .aurora-footer {
+            padding: 3rem 5%;
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== SCROLL REVEAL ===== */
+        .ar {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .ar.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .aurora-about { grid-template-columns: 1fr; }
+            .blob { display: none; }
+        }
+        @media (max-width: 768px) {
+            .aurora-hero h1 { font-size: 2.5rem; }
+            .aurora-nav-links { display: none; }
+            .aurora-depts-grid { grid-template-columns: 1fr; }
+            .aurora-portfolio-grid { grid-template-columns: 1fr; }
+            .aurora-header h2 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="aurora-canvas"></canvas>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="blob blob-4"></div>
+
+    <nav class="aurora-nav">
+        <div class="aurora-logo">AVRIL</div>
+        <ul class="aurora-nav-links">
+            <li><a href="#about">Sobre Mí</a></li>
+            <li><a href="#depts">Departamentos</a></li>
+            <li><a href="#portfolio">Portafolio</a></li>
+            <li><a href="#contact">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero -->
+    <section class="aurora-hero">
+        <div class="aurora-hero-content">
+            <div class="aurora-badge">
+                <span class="pulse-dot"></span>
+                Latina · 22 años · Quito, Ecuador 🇪🇨
+            </div>
+            <h1>
+                Creo contenido<br>
+                que <span class="gradient">brilla</span> y vende
+            </h1>
+            <p class="aurora-hero-sub">
+                Marketing Digital · Video & Storytelling · Business Admin USFQ
+            </p>
+            <div class="aurora-hero-vibe">
+                <div class="wave-bar">
+                    <span></span><span></span><span></span><span></span><span></span>
+                </div>
+                <span>🎧 Vibes: Bad Bunny, Karol G, perreo intelectual 🐰</span>
+            </div>
+            <div class="aurora-buttons">
+                <a href="#portfolio" class="btn-aurora btn-aurora-primary">
+                    <i class="fas fa-sparkles"></i> Ver mi trabajo
+                </a>
+                <a href="#contact" class="btn-aurora btn-aurora-outline">
+                    <i class="fab fa-whatsapp"></i> Contáctame
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="aurora-section" id="about">
+        <div class="aurora-section-inner">
+            <div class="aurora-about">
+                <div class="aurora-about-visual ar">
+                    <div class="aurora-glass-card">
+                        <div class="icon">✨</div>
+                        <div class="badges">
+                            <span class="badge">🇪🇨 Quito</span>
+                            <span class="badge">🎓 USFQ</span>
+                            <span class="badge">🐰 Bunny</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="aurora-about-content ar">
+                    <h3>Soy la mezcla perfecta entre <span class="highlight">creatividad</span> y <span class="highlight">estrategia</span></h3>
+                    <p>
+                        Tengo 22 años, soy <strong>ecuatoriana 100%</strong>, nacida y criada en Quito. 
+                        Estudié Administración de Negocios en la <strong>Universidad San Francisco de Quito</strong>.
+                    </p>
+                    <p>
+                        No soy la típica admin. Me apasiona <strong>crear contenido que conecte</strong>. 
+                        Videos que cuenten historias. Estrategias que vendan. Posts que hagan scroll hasta el final.
+                    </p>
+                    <div class="quote">
+                        "Si no te han bloqueado de una red social, es que no has creado contenido suficiente."
+                    </div>
+                    <p>
+                        Cuando no estoy ideando campañas, estoy escuchando <strong>Bad Bunny</strong>, 
+                        descubriendo nuevos spots en Quito, o aprendiendo herramientas de IA.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Departments -->
+    <section class="aurora-section" id="depts">
+        <div class="aurora-section-inner">
+            <div class="aurora-header ar">
+                <div class="tag">Mi Arsenal</div>
+                <h2>18 Departamentos</h2>
+                <p>Un ecosistema completo de habilidades diseñado para crear valor real en cualquier organización.</p>
+            </div>
+            <div class="aurora-depts-grid">
+                <div class="aurora-dept-card ar"><div class="aurora-dept-header"><span class="aurora-dept-num">01</span><span class="aurora-dept-icon">📢</span></div><h3>Marketing y Ventas</h3><p>Social media, branding, copywriting y generación de leads.</p><div class="aurora-dept-skills"><span>Social Media</span><span>Copywriting</span><span>Branding</span></div></div>
+                <div class="aurora-dept-card ar"><div class="aurora-dept-header"><span class="aurora-dept-num">02</span><span class="aurora-dept-icon">🎯</span></div><h3>Estrategia y Planificación</h3><p>OKRs, FODA, roadmap de 90 días para objetivos claros.</p><div class="aurora-dept-skills"><span>OKRs</span><span>FODA</span><span>Roadmap</span></div></div>
+                <div class="aurora-dept-card ar"><div class="aurora-dept-header"><span class="aurora-dept-num">03</span><span class="aurora-dept-icon">⚙️</span></div><h3>Operaciones y Logística</h3><p>Time-blocking, Kanban, Notion, productividad extrema.</p><div class="aurora-dept-skills"><span>Productividad</span><span>Kanban</span><span>Notion</span></div></div>
+                <div class="aurora-dept-card ar"><div class="aurora-dept-header"><span class="aurora-dept-num">04</span><span class="aurora-dept-icon">📊</span></div><h3>Análisis de Mercado</h3><p>Research laboral, competencia, insights de mercado EC.</p><div class="aurora-dept-skills"><span>Research</span><span>Excel</span><span>Insights</span></div></div>
+                <div class="aurora-dept-card ar"><div class="aurora-dept-header"><span class="aurora-dept-num">05</span><span class="aurora-dept-icon">👥</span></div><h3>Recursos Humanos</h3><p>CV estratégico, LinkedIn optimization, prep entrevistas.</p><div class="aurora-dept-skills"><span>CV</span><span>LinkedIn</span><span>Entrevistas</span></div></div>
+                <div class="aurora-dept-card ar"><div class="aurora-dept-header"><span class="aurora-dept-num">06</span><span class="aurora-dept-icon">💰</span></div><h3>Finanzas y Contabilidad</h3><p>Presupuestos, ROI, negociación salarial.</p><div class="aurora-dept-skills"><span>Presupuestos</span><span>ROI</span><span>Negociación</span></div></div>
+                <div class="aurora-dept-card ar"><div class="aurora-dept-header"><span class="aurora-dept-num">07</span><span class="aurora-dept-icon">⚖️</span></div><h3>Legal y Regulaciones</h3><p>Derechos laborales EC, copyright, protección de marca.</p><div class="aurora-dept-skills"><span>Derechos</span><span>Copyright</span><span>Privacidad</span></div></div>
+                <div class="aurora-dept-card ar"><div class="aurora-dept-header"><span class="aurora-dept-num">08</span><span class="aurora-dept-icon">💻</span></div><h3>Tecnología e Innovación</h3><p>Canva, CapCut, Metricool, automatización.</p><div class="aurora-dept-skills"><span>Canva Pro</span><span>CapCut</span><span>Automatización</span></div></div>
+                <div class="aurora-dept-card ar"><div class="aurora-dept-header"><span class="aurora-dept-num">09</span><span class="aurora-dept-icon">🤝</span></div><h3>Atención al Cliente</h3><p>Networking, CX del reclutador, comunidad.</p><div class="aurora-dept-skills"><span>CX</span><span>Networking</span><span>Comunicación</span></div></div>
+                <div class="aurora-dept-card ar"><div class="aurora-dept-header"><span class="aurora-dept-num">10</span><span class="aurora-dept-icon">🤖</span></div><h3>Inteligencia Artificial</h3><p>ChatGPT, Claude, Kimi, Canva AI, prompts avanzados.</p><div class="aurora-dept-skills"><span>ChatGPT</span><span>Claude</span><span>Prompts</span></div></div>
+                <div class="aurora-dept-card ar"><div class="aurora-dept-header"><span class="aurora-dept-num">11</span><span class="aurora-dept-icon">🏛️</span></div><h3>Datos Gubernamentales</h3><p>INEC, BCE, regulaciones, oportunidades públicas.</p><div class="aurora-dept-skills"><span>INEC</span><span>BCE</span><span>Regulación</span></div></div>
+                <div class="aurora-dept-card ar"><div class="aurora-dept-header"><span class="aurora-dept-num">12</span><span class="aurora-dept-icon">🔮</span></div><h3>Predicciones y Prospectivo</h3><p>Tendencias, prospectiva, roles emergentes.</p><div class="aurora-dept-skills"><span>Trends</span><span>Futuro</span><span>Innovación</span></div></div>
+                <div class="aurora-dept-card ar"><div class="aurora-dept-header"><span class="aurora-dept-num">13</span><span class="aurora-dept-icon">🛡️</span></div><h3>Gestión de Crisis</h3><p>Resiliencia, burnout prevention, protocolos.</p><div class="aurora-dept-skills"><span>Resiliencia</span><span>Bienestar</span><span>Protocolos</span></div></div>
+                <div class="aurora-dept-card ar"><div class="aurora-dept-header"><span class="aurora-dept-num">14</span><span class="aurora-dept-icon">🌱</span></div><h3>Sostenibilidad y ESG</h3><p>Propósito, responsabilidad social, sostenibilidad.</p><div class="aurora-dept-skills"><span>ESG</span><span>Sostenibilidad</span><span>Propósito</span></div></div>
+                <div class="aurora-dept-card ar"><div class="aurora-dept-header"><span class="aurora-dept-num">15</span><span class="aurora-dept-icon">📈</span></div><h3>Control Integral</h3><p>KPIs, dashboards, métricas, mejora continua.</p><div class="aurora-dept-skills"><span>KPIs</span><span>Dashboards</span><span>Métricas</span></div></div>
+                <div class="aurora-dept-card ar"><div class="aurora-dept-header"><span class="aurora-dept-num">16</span><span class="aurora-dept-icon">📜</span></div><h3>Política de Empresa</h3><p>Ética, valores, código de conducta personal.</p><div class="aurora-dept-skills"><span>Ética</span><span>Valores</span><span>Integridad</span></div></div>
+                <div class="aurora-dept-card ar"><div class="aurora-dept-header"><span class="aurora-dept-num">17</span><span class="aurora-dept-icon">👨‍👩‍👧</span></div><h3>Empresas Familiares</h3><p>Dinámicas familiares, gobernanza, protocolos.</p><div class="aurora-dept-skills"><span>Familia</span><span>Gobernanza</span><span>Protocolos</span></div></div>
+                <div class="aurora-dept-card ar"><div class="aurora-dept-header"><span class="aurora-dept-num">18</span><span class="aurora-dept-icon">🎭</span></div><h3>Escenario de Negocios</h3><p>Startups, corporativos, agencias, simulación.</p><div class="aurora-dept-skills"><span>Startups</span><span>Corporativos</span><span>Agencias</span></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio -->
+    <section class="aurora-section" id="portfolio">
+        <div class="aurora-section-inner">
+            <div class="aurora-header ar">
+                <div class="tag">Mi Trabajo</div>
+                <h2>Catálogo de Proyectos</h2>
+                <p>Cada proyecto es una historia. Cada historia es una oportunidad de demostrar lo que puedo crear.</p>
+            </div>
+            <div class="aurora-portfolio-grid">
+                <div class="aurora-port-card ar">
+                    <div class="aurora-port-img" style="background: linear-gradient(135deg, rgba(0,255,157,0.2), rgba(0,212,255,0.2));">🎬</div>
+                    <div class="aurora-port-content"><h3>Video Marketing Campaign</h3><p>Producción audiovisual completa para marca local de Quito. Storytelling emocional.</p><div class="aurora-port-tags"><span>Video</span><span>Storytelling</span><span>Edición</span></div></div>
+                </div>
+                <div class="aurora-port-card ar">
+                    <div class="aurora-port-img" style="background: linear-gradient(135deg, rgba(184,41,221,0.2), rgba(255,107,157,0.2));">📊</div>
+                    <div class="aurora-port-content"><h3>Market Research Ecuador</h3><p>Análisis del consumidor digital ecuatoriano con datos del INEC.</p><div class="aurora-port-tags"><span>Research</span><span>Datos</span><span>Estrategia</span></div></div>
+                </div>
+                <div class="aurora-port-card ar">
+                    <div class="aurora-port-img" style="background: linear-gradient(135deg, rgba(255,215,0,0.2), rgba(0,255,157,0.2));">🎨</div>
+                    <div class="aurora-port-content"><h3>Brand Identity System</h3><p>Manual completo: logo, paleta, tipografía, aplicaciones digitales.</p><div class="aurora-port-tags"><span>Branding</span><span>Diseño</span><span>Identidad</span></div></div>
+                </div>
+                <div class="aurora-port-card ar">
+                    <div class="aurora-port-img" style="background: linear-gradient(135deg, rgba(0,212,255,0.2), rgba(184,41,221,0.2));">📱</div>
+                    <div class="aurora-port-content"><h3>Social Media Strategy</h3><p>Plan integral para Instagram y TikTok con calendario editorial.</p><div class="aurora-port-tags"><span>Social Media</span><span>Contenido</span><span>Viral</span></div></div>
+                </div>
+                <div class="aurora-port-card ar">
+                    <div class="aurora-port-img" style="background: linear-gradient(135deg, rgba(255,107,157,0.2), rgba(255,215,0,0.2));">💡</div>
+                    <div class="aurora-port-content"><h3>Business Model Canvas</h3><p>Canvas, proyecciones financieras y pitch deck para startup.</p><div class="aurora-port-tags"><span>Negocios</span><span>Innovación</span><span>Pitch</span></div></div>
+                </div>
+                <div class="aurora-port-card ar">
+                    <div class="aurora-port-img" style="background: linear-gradient(135deg, rgba(0,255,157,0.2), rgba(255,107,157,0.2));">🤖</div>
+                    <div class="aurora-port-content"><h3>AI Automation Pipeline</h3><p>Flujos automatizados con IA. Reducción del 60% en tiempo.</p><div class="aurora-port-tags"><span>IA</span><span>Automatización</span><span>Productividad</span></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="aurora-section aurora-contact" id="contact">
+        <div class="aurora-section-inner">
+            <div class="aurora-header ar">
+                <div class="tag">Hablemos</div>
+                <h2>¿Creamos algo <span class="gradient">épico</span> juntos? 🚀</h2>
+                <p>Estoy buscando una oportunidad donde pueda poner toda mi energía, creatividad y conocimiento para crear impacto real.</p>
+            </div>
+            <div class="aurora-buttons ar" style="justify-content: center;">
+                <a href="mailto:avril@ejemplo.com" class="btn-aurora btn-aurora-primary">
+                    <i class="fas fa-paper-plane"></i> Enviar email
+                </a>
+                <a href="#" class="btn-aurora btn-aurora-outline">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                </a>
+            </div>
+            <div class="aurora-social ar">
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+                <a href="#"><i class="fab fa-behance"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="aurora-footer">
+        © 2025 Avril Velasco · Hecho con 💚 en Quito, Ecuador 🇪🇨 · "Si yo quiero un baby, tú me das un baby..." 🐰🌸
+    </footer>
+
+    <script>
+        // Aurora Wave Canvas
+        const canvas = document.getElementById('aurora-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let time = 0;
+        const waves = [
+            { color: 'rgba(0, 255, 157, 0.15)', speed: 0.01, amplitude: 50, frequency: 0.003 },
+            { color: 'rgba(0, 212, 255, 0.12)', speed: 0.015, amplitude: 70, frequency: 0.002 },
+            { color: 'rgba(184, 41, 221, 0.1)', speed: 0.008, amplitude: 40, frequency: 0.004 },
+            { color: 'rgba(255, 107, 157, 0.08)', speed: 0.012, amplitude: 60, frequency: 0.0025 }
+        ];
+
+        function drawAurora() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            waves.forEach((wave, index) => {
+                ctx.beginPath();
+                ctx.moveTo(0, canvas.height);
+                
+                for (let x = 0; x <= canvas.width; x += 5) {
+                    const y = canvas.height * 0.3 + 
+                              Math.sin(x * wave.frequency + time * wave.speed + index) * wave.amplitude +
+                              Math.sin(x * wave.frequency * 2 + time * wave.speed * 1.5) * (wave.amplitude * 0.5);
+                    ctx.lineTo(x, y);
+                }
+                
+                ctx.lineTo(canvas.width, canvas.height);
+                ctx.closePath();
+                
+                const gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
+                gradient.addColorStop(0, wave.color);
+                gradient.addColorStop(0.5, wave.color.replace(/[\d.]+\)$/, '0.3)'));
+                gradient.addColorStop(1, wave.color);
+                ctx.fillStyle = gradient;
+                ctx.fill();
+            });
+            
+            time++;
+            requestAnimationFrame(drawAurora);
+        }
+        drawAurora();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Scroll Reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('revealed');
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.ar').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

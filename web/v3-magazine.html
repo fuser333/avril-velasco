@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avril Velasco Magazine | The Creative Issue</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Montserrat:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --rose: #E8B4B8;
+            --cream: #FAF7F2;
+            --charcoal: #2C2C2C;
+            --warm-gray: #8A8A8A;
+            --sage: #9CAF88;
+            --terracotta: #C67B5C;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--cream);
+            color: var(--charcoal);
+            overflow-x: hidden;
+        }
+
+        /* ===== SMOOTH SCROLL CONTAINER ===== */
+        .smooth-scroll { overflow: hidden; }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(60px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeLeft {
+            from { opacity: 0; transform: translateX(-80px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeRight {
+            from { opacity: 0; transform: translateX(80px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes slideReveal {
+            from { clip-path: inset(0 100% 0 0); }
+            to { clip-path: inset(0 0 0 0); }
+        }
+        @keyframes letterSpacing {
+            from { letter-spacing: 20px; opacity: 0; }
+            to { letter-spacing: 8px; opacity: 1; }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* ===== NAVIGATION ===== */
+        .mag-nav {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            padding: 1.5rem 4%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(250, 247, 242, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        .mag-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: 4px;
+            color: var(--charcoal);
+        }
+        .mag-nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+        .mag-nav-links a {
+            color: var(--charcoal);
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            transition: color 0.3s;
+        }
+        .mag-nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px; left: 0;
+            width: 0; height: 1px;
+            background: var(--gold);
+            transition: width 0.3s;
+        }
+        .mag-nav-links a:hover { color: var(--gold); }
+        .mag-nav-links a:hover::after { width: 100%; }
+
+        /* ===== HERO MAGAZINE ===== */
+        .mag-hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            position: relative;
+        }
+        .mag-hero-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 8rem 6rem;
+            position: relative;
+            z-index: 2;
+        }
+        .mag-issue {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--warm-gray);
+            margin-bottom: 2rem;
+        }
+        .mag-hero-left h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 5.5rem;
+            font-weight: 300;
+            line-height: 1;
+            margin-bottom: 2rem;
+            color: var(--charcoal);
+        }
+        .mag-hero-left h1 em {
+            font-style: italic;
+            font-weight: 400;
+            color: var(--terracotta);
+        }
+        .mag-hero-left .subtitle {
+            font-size: 1.1rem;
+            color: var(--warm-gray);
+            line-height: 1.8;
+            margin-bottom: 3rem;
+            max-width: 400px;
+        }
+        .mag-hero-left .location {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 0.85rem;
+            color: var(--warm-gray);
+            margin-bottom: 3rem;
+        }
+        .mag-hero-left .location i { color: var(--terracotta); }
+        .mag-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 2.5rem;
+            background: var(--charcoal);
+            color: var(--cream);
+            text-decoration: none;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 500;
+            transition: all 0.4s;
+            width: fit-content;
+        }
+        .mag-cta:hover {
+            background: var(--gold);
+            color: var(--charcoal);
+            transform: translateX(10px);
+        }
+
+        .mag-hero-right {
+            position: relative;
+            overflow: hidden;
+        }
+        .mag-hero-image {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--rose), var(--sage), var(--terracotta));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .mag-hero-image::before {
+            content: '';
+            position: absolute;
+            inset: 40px;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        .mag-hero-image .center-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 8rem;
+            font-weight: 300;
+            color: rgba(255,255,255,0.9);
+            line-height: 1;
+            text-align: center;
+        }
+        .mag-hero-image .center-text small {
+            display: block;
+            font-size: 1.2rem;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            margin-top: 1rem;
+        }
+        .mag-hero-badge {
+            position: absolute;
+            bottom: 60px;
+            right: 60px;
+            background: rgba(255,255,255,0.9);
+            padding: 1.5rem 2rem;
+            backdrop-filter: blur(10px);
+        }
+        .mag-hero-badge .label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--warm-gray);
+            margin-bottom: 0.5rem;
+        }
+        .mag-hero-badge .value {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--charcoal);
+        }
+
+        /* ===== SECTION STYLES ===== */
+        .mag-section {
+            padding: 10rem 6rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .mag-section-header {
+            text-align: center;
+            margin-bottom: 6rem;
+        }
+        .mag-section-header .label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+        }
+        .mag-section-header h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            font-weight: 300;
+            line-height: 1.1;
+        }
+        .mag-section-header h2 em {
+            font-style: italic;
+            color: var(--terracotta);
+        }
+
+        /* ===== ABOUT MAGAZINE ===== */
+        .mag-about {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 6rem;
+            align-items: center;
+            padding: 0 6rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .mag-about-image {
+            position: relative;
+        }
+        .mag-about-image-main {
+            width: 100%;
+            aspect-ratio: 3/4;
+            background: linear-gradient(135deg, var(--rose), #D4A5A5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .mag-about-image-main::before {
+            content: '';
+            position: absolute;
+            inset: 30px;
+            border: 1px solid rgba(255,255,255,0.4);
+        }
+        .mag-about-image-main span {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 6rem;
+            color: rgba(255,255,255,0.8);
+        }
+        .mag-about-image-overlay {
+            position: absolute;
+            bottom: -30px;
+            right: -30px;
+            background: var(--charcoal);
+            color: var(--cream);
+            padding: 2rem;
+            max-width: 250px;
+        }
+        .mag-about-image-overlay .quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        .mag-about-image-overlay .author {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 1rem;
+            opacity: 0.7;
+        }
+        .mag-about-content .tag {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--gold);
+            margin-bottom: 2rem;
+        }
+        .mag-about-content h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 300;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+        }
+        .mag-about-content h3 em {
+            font-style: italic;
+            color: var(--terracotta);
+        }
+        .mag-about-content p {
+            color: var(--warm-gray);
+            line-height: 2;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+        .mag-about-content .highlight {
+            color: var(--charcoal);
+            font-weight: 500;
+        }
+
+        /* ===== DEPARTMENTS MAGAZINE ===== */
+        .mag-depts {
+            background: var(--charcoal);
+            color: var(--cream);
+            padding: 10rem 6rem;
+        }
+        .mag-depts-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .mag-depts-header {
+            text-align: center;
+            margin-bottom: 6rem;
+        }
+        .mag-depts-header .label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+        }
+        .mag-depts-header h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            font-weight: 300;
+        }
+        .mag-depts-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            background: rgba(255,255,255,0.1);
+        }
+        .mag-dept-item {
+            background: var(--charcoal);
+            padding: 2.5rem 2rem;
+            transition: all 0.4s;
+            cursor: pointer;
+        }
+        .mag-dept-item:hover {
+            background: rgba(255,255,255,0.05);
+        }
+        .mag-dept-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+        .mag-dept-item h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+            letter-spacing: 1px;
+        }
+        .mag-dept-item p {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.5);
+            line-height: 1.7;
+        }
+
+        /* ===== PORTFOLIO MAGAZINE ===== */
+        .mag-portfolio {
+            padding: 10rem 6rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .mag-portfolio-header {
+            text-align: center;
+            margin-bottom: 6rem;
+        }
+        .mag-portfolio-header .label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+        }
+        .mag-portfolio-header h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            font-weight: 300;
+        }
+        .mag-portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-auto-rows: 300px;
+            gap: 1.5rem;
+        }
+        .mag-port-item {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .mag-port-item:nth-child(1) { grid-column: span 7; }
+        .mag-port-item:nth-child(2) { grid-column: span 5; }
+        .mag-port-item:nth-child(3) { grid-column: span 5; }
+        .mag-port-item:nth-child(4) { grid-column: span 7; }
+        .mag-port-item:nth-child(5) { grid-column: span 6; }
+        .mag-port-item:nth-child(6) { grid-column: span 6; }
+        .mag-port-item .port-bg {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            transition: transform 0.6s;
+        }
+        .mag-port-item:hover .port-bg {
+            transform: scale(1.05);
+        }
+        .mag-port-item .port-overlay {
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 100%;
+            padding: 2rem;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.4s;
+        }
+        .mag-port-item:hover .port-overlay {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .mag-port-item .port-overlay h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        .mag-port-item .port-overlay p {
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
+        /* ===== CONTACT MAGAZINE ===== */
+        .mag-contact {
+            background: var(--charcoal);
+            color: var(--cream);
+            padding: 10rem 6rem;
+            text-align: center;
+        }
+        .mag-contact-inner {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .mag-contact .label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--gold);
+            margin-bottom: 2rem;
+        }
+        .mag-contact h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4.5rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            line-height: 1.1;
+        }
+        .mag-contact h2 em {
+            font-style: italic;
+            color: var(--rose);
+        }
+        .mag-contact p {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.8;
+            margin-bottom: 3rem;
+        }
+        .mag-contact-btn {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            transition: all 0.4s;
+        }
+        .mag-contact-btn:hover {
+            background: var(--gold);
+            color: var(--charcoal);
+        }
+        .mag-social {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+        .mag-social a {
+            width: 50px; height: 50px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255,255,255,0.6);
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        .mag-social a:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            transform: translateY(-3px);
+        }
+
+        /* ===== FOOTER ===== */
+        .mag-footer {
+            padding: 3rem 6rem;
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--warm-gray);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+
+        /* ===== SCROLL REVEAL ===== */
+        .sr {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .sr.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .sr-left {
+            opacity: 0;
+            transform: translateX(-60px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .sr-left.revealed {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .sr-right {
+            opacity: 0;
+            transform: translateX(60px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .sr-right.revealed {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .sr-scale {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .sr-scale.revealed {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .mag-hero { grid-template-columns: 1fr; }
+            .mag-hero-right { min-height: 50vh; }
+            .mag-about { grid-template-columns: 1fr; }
+            .mag-depts-grid { grid-template-columns: repeat(2, 1fr); }
+            .mag-portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+            .mag-port-item:nth-child(n) { grid-column: span 1; }
+        }
+        @media (max-width: 768px) {
+            .mag-nav-links { display: none; }
+            .mag-hero-left { padding: 6rem 2rem; }
+            .mag-hero-left h1 { font-size: 3rem; }
+            .mag-section, .mag-depts, .mag-portfolio, .mag-contact { padding: 5rem 2rem; }
+            .mag-depts-grid { grid-template-columns: 1fr; }
+            .mag-portfolio-grid { grid-template-columns: 1fr; grid-auto-rows: 250px; }
+            .mag-about { padding: 0 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="mag-nav">
+        <div class="mag-logo">AVRiL</div>
+        <ul class="mag-nav-links">
+            <li><a href="#about">Editorial</a></li>
+            <li><a href="#depts">Features</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero -->
+    <section class="mag-hero">
+        <div class="mag-hero-left">
+            <div class="mag-issue">The Creative Issue · Vol. 1 · 2025</div>
+            <h1>
+                Creo<br>
+                <em>contenido</em><br>
+                que conecta
+            </h1>
+            <p class="subtitle">
+                Marketing digital, producción audiovisual y estrategia de negocios. 
+                Hecha en Quito, lista para el mundo.
+            </p>
+            <div class="location">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Quito, Ecuador · 22 años · USFQ</span>
+            </div>
+            <a href="#portfolio" class="mag-cta">
+                Ver Portafolio <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+        <div class="mag-hero-right">
+            <div class="mag-hero-image">
+                <div class="center-text">
+                    🌸
+                    <small>Latina Power</small>
+                </div>
+                <div class="mag-hero-badge">
+                    <div class="label">Featured</div>
+                    <div class="value">18 Áreas de Expertise</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="mag-about" id="about">
+        <div class="mag-about-image sr-left">
+            <div class="mag-about-image-main">
+                <span>👩🏻‍💻</span>
+            </div>
+            <div class="mag-about-image-overlay">
+                <div class="quote">"Si no te han bloqueado de una red social, es que no has creado contenido suficiente."</div>
+                <div class="author">— Avril Velasco</div>
+            </div>
+        </div>
+        <div class="mag-about-content sr-right">
+            <div class="tag">Sobre la Creadora</div>
+            <h3>
+                La mezcla perfecta entre <em>creatividad</em> y <em>estrategia</em>
+            </h3>
+            <p>
+                Soy <span class="highlight">ecuatoriana 100%</span>, nacida y criada en Quito. Estudié 
+                Administración de Negocios en la Universidad San Francisco de Quito — la mejor del país.
+            </p>
+            <p>
+                Pero no soy la típica admin. Me apasiona <span class="highlight">crear contenido que conecte</span>. 
+                Videos que cuenten historias. Estrategias que vendan. Posts que hagan scroll hasta el final.
+            </p>
+            <p>
+                Cuando no estoy ideando campañas, estoy escuchando <span class="highlight">Bad Bunny</span> 
+                (toda la discografía), descubriendo nuevos spots en Quito, o aprendiendo herramientas de IA.
+            </p>
+        </div>
+    </section>
+
+    <!-- Departments -->
+    <section class="mag-depts" id="depts">
+        <div class="mag-depts-inner">
+            <div class="mag-depts-header sr">
+                <div class="label">El Arsenal</div>
+                <h2>18 Departamentos de Conocimiento</h2>
+            </div>
+            <div class="mag-depts-grid">
+                <div class="mag-dept-item sr-scale"><div class="mag-dept-num">01</div><h3>Marketing y Ventas</h3><p>Social media, branding, copywriting y generación de leads.</p></div>
+                <div class="mag-dept-item sr-scale"><div class="mag-dept-num">02</div><h3>Estrategia y Planificación</h3><p>OKRs, FODA, roadmap de 90 días para objetivos claros.</p></div>
+                <div class="mag-dept-item sr-scale"><div class="mag-dept-num">03</div><h3>Operaciones y Logística</h3><p>Time-blocking, Kanban, Notion, productividad extrema.</p></div>
+                <div class="mag-dept-item sr-scale"><div class="mag-dept-num">04</div><h3>Análisis de Mercado</h3><p>Research laboral, competencia, insights de mercado EC.</p></div>
+                <div class="mag-dept-item sr-scale"><div class="mag-dept-num">05</div><h3>Recursos Humanos</h3><p>CV estratégico, LinkedIn optimization, prep entrevistas.</p></div>
+                <div class="mag-dept-item sr-scale"><div class="mag-dept-num">06</div><h3>Finanzas y Contabilidad</h3><p>Presupuestos, ROI, negociación salarial.</p></div>
+                <div class="mag-dept-item sr-scale"><div class="mag-dept-num">07</div><h3>Legal y Regulaciones</h3><p>Derechos laborales EC, copyright, protección de marca.</p></div>
+                <div class="mag-dept-item sr-scale"><div class="mag-dept-num">08</div><h3>Tecnología e Innovación</h3><p>Canva, CapCut, Metricool, automatización.</p></div>
+                <div class="mag-dept-item sr-scale"><div class="mag-dept-num">09</div><h3>Atención al Cliente</h3><p>Networking, CX del reclutador, comunidad.</p></div>
+                <div class="mag-dept-item sr-scale"><div class="mag-dept-num">10</div><h3>Inteligencia Artificial</h3><p>ChatGPT, Claude, Kimi, Canva AI, prompts avanzados.</p></div>
+                <div class="mag-dept-item sr-scale"><div class="mag-dept-num">11</div><h3>Datos Gubernamentales</h3><p>INEC, BCE, regulaciones, oportunidades públicas.</p></div>
+                <div class="mag-dept-item sr-scale"><div class="mag-dept-num">12</div><h3>Predicciones y Prospectivo</h3><p>Tendencias, prospectiva, roles emergentes.</p></div>
+                <div class="mag-dept-item sr-scale"><div class="mag-dept-num">13</div><h3>Gestión de Crisis</h3><p>Resiliencia, burnout prevention, protocolos.</p></div>
+                <div class="mag-dept-item sr-scale"><div class="mag-dept-num">14</div><h3>Sostenibilidad y ESG</h3><p>Propósito, responsabilidad social, sostenibilidad.</p></div>
+                <div class="mag-dept-item sr-scale"><div class="mag-dept-num">15</div><h3>Control Integral</h3><p>KPIs, dashboards, métricas, mejora continua.</p></div>
+                <div class="mag-dept-item sr-scale"><div class="mag-dept-num">16</div><h3>Política de Empresa</h3><p>Ética, valores, código de conducta personal.</p></div>
+                <div class="mag-dept-item sr-scale"><div class="mag-dept-num">17</div><h3>Empresas Familiares</h3><p>Dinámicas familiares, gobernanza, protocolos.</p></div>
+                <div class="mag-dept-item sr-scale"><div class="mag-dept-num">18</div><h3>Escenario de Negocios</h3><p>Startups, corporativos, agencias, simulación.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio -->
+    <section class="mag-portfolio" id="portfolio">
+        <div class="mag-portfolio-header sr">
+            <div class="label">Featured Work</div>
+            <h2>Catálogo de Proyectos</h2>
+        </div>
+        <div class="mag-portfolio-grid">
+            <div class="mag-port-item sr">
+                <div class="port-bg" style="background: linear-gradient(135deg, #E8B4B8, #D4A5A5);">🎬</div>
+                <div class="port-overlay"><h3>Video Marketing Campaign</h3><p>Producción audiovisual completa</p></div>
+            </div>
+            <div class="mag-port-item sr">
+                <div class="port-bg" style="background: linear-gradient(135deg, #9CAF88, #7A9A6D);">📊</div>
+                <div class="port-overlay"><h3>Market Research Ecuador</h3><p>Análisis del consumidor digital</p></div>
+            </div>
+            <div class="mag-port-item sr">
+                <div class="port-bg" style="background: linear-gradient(135deg, #C67B5C, #A65D3F);">🎨</div>
+                <div class="port-overlay"><h3>Brand Identity System</h3><p>Manual completo de marca</p></div>
+            </div>
+            <div class="mag-port-item sr">
+                <div class="port-bg" style="background: linear-gradient(135deg, #D4AF37, #B8941F);">📱</div>
+                <div class="port-overlay"><h3>Social Media Strategy</h3><p>Calendario editorial y métricas</p></div>
+            </div>
+            <div class="mag-port-item sr">
+                <div class="port-bg" style="background: linear-gradient(135deg, #2C2C2C, #4A4A4A);">💡</div>
+                <div class="port-overlay"><h3>Business Model Canvas</h3><p>Canvas y pitch deck</p></div>
+            </div>
+            <div class="mag-port-item sr">
+                <div class="port-bg" style="background: linear-gradient(135deg, #8B7D6B, #6B5D4F);">🤖</div>
+                <div class="port-overlay"><h3>AI Automation Pipeline</h3><p>Flujos automatizados con IA</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="mag-contact" id="contact">
+        <div class="mag-contact-inner sr">
+            <div class="label">Let's Connect</div>
+            <h2>
+                ¿Creamos algo<br>
+                <em>épico</em> juntos?
+            </h2>
+            <p>
+                Estoy buscando una oportunidad donde pueda poner toda mi energía, 
+                creatividad y conocimiento. Si necesitas alguien que entienda de marketing, 
+                cree contenido que enganche y aporte frescura a tu equipo... soy esa persona.
+            </p>
+            <a href="mailto:avril@ejemplo.com" class="mag-contact-btn">Iniciar Conversación</a>
+            <div class="mag-social">
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+                <a href="#"><i class="fab fa-behance"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="mag-footer">
+        © 2025 Avril Velasco · Quito, Ecuador 🇪🇨 · "Si yo quiero un baby, tú me das un baby..." 🐰
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('revealed');
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.sr, .sr-left, .sr-right, .sr-scale').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

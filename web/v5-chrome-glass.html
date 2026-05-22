@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avril Velasco — Community Manager & Marketing Digital</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+    <style>
+        :root {
+            --bg-deep: #0A0A0F;
+            --bg-elevated: #12121A;
+            --chrome-gold: #D4AF37;
+            --chrome-silver: #C0C0C0;
+            --chrome-copper: #C67B5C;
+            --text-primary: #F5F0EB;
+            --text-secondary: #A09B96;
+            --text-muted: #5A5550;
+            --glass-border: rgba(212, 175, 55, 0.15);
+            --glass-border-bright: rgba(212, 175, 55, 0.4);
+            --glass-bg: rgba(18, 18, 26, 0.6);
+            --glass-bg-hover: rgba(18, 18, 26, 0.8);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--bg-deep);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* ===== CANVAS DE PARTÍCULAS ===== */
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* ===== GRADIENTES CROMADOS DE FONDO ===== */
+        .chrome-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(120px);
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.4;
+            animation: orbFloat 20s ease-in-out infinite;
+        }
+
+        .chrome-orb-1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(212,175,55,0.3) 0%, transparent 70%);
+            top: -200px;
+            right: -200px;
+            animation-delay: 0s;
+        }
+
+        .chrome-orb-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(198,123,92,0.25) 0%, transparent 70%);
+            bottom: -150px;
+            left: -150px;
+            animation-delay: -7s;
+        }
+
+        .chrome-orb-3 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(192,192,192,0.2) 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            animation-delay: -14s;
+        }
+
+        @keyframes orbFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.95); }
+        }
+
+        /* ===== LÍNEAS CROMADAS ===== */
+        .chrome-line {
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(212,175,55,0.3) 20%, 
+                rgba(212,175,55,0.8) 50%, 
+                rgba(192,192,192,0.5) 80%, 
+                transparent 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chrome-line::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255,255,255,0.6), 
+                transparent);
+            animation: lineShine 3s ease-in-out infinite;
+        }
+
+        @keyframes lineShine {
+            0% { left: -100%; }
+            50% { left: 100%; }
+            100% { left: 100%; }
+        }
+
+        /* ===== NAVBAR ===== */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(180deg, rgba(10,10,15,0.9) 0%, transparent 100%);
+            backdrop-filter: blur(20px);
+        }
+
+        .nav-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            background: linear-gradient(135deg, var(--chrome-gold), var(--chrome-silver), var(--chrome-copper));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: linear-gradient(90deg, var(--chrome-gold), var(--chrome-silver));
+            transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .nav-links a:hover {
+            color: var(--chrome-gold);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 10;
+            padding: 0 4rem;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 900px;
+        }
+
+        .hero-label {
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: var(--chrome-copper);
+            margin-bottom: 2rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .hero-label::before,
+        .hero-label::after {
+            content: '';
+            width: 40px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--chrome-copper));
+        }
+
+        .hero-label::after {
+            background: linear-gradient(90deg, var(--chrome-copper), transparent);
+        }
+
+        .hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3.5rem, 8vw, 7rem);
+            font-weight: 300;
+            line-height: 1.05;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+        }
+
+        .hero-title .highlight {
+            font-style: italic;
+            font-weight: 500;
+            background: linear-gradient(135deg, var(--chrome-gold) 0%, var(--chrome-silver) 50%, var(--chrome-copper) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+
+        .hero-title .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--chrome-gold), var(--chrome-silver));
+            opacity: 0.6;
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            max-width: 550px;
+            margin: 0 auto 3rem;
+            letter-spacing: 0.5px;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, rgba(212,175,55,0.1), rgba(192,192,192,0.05));
+            border: 1px solid var(--glass-border-bright);
+            border-radius: 100px;
+            color: var(--chrome-gold);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212,175,55,0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .hero-cta:hover {
+            border-color: var(--chrome-gold);
+            box-shadow: 0 0 40px rgba(212,175,55,0.2), inset 0 0 20px rgba(212,175,55,0.05);
+            transform: translateY(-3px);
+        }
+
+        .hero-cta:hover::before {
+            left: 100%;
+        }
+
+        .hero-cta i {
+            font-size: 1.2rem;
+            transition: transform 0.4s ease;
+        }
+
+        .hero-cta:hover i {
+            transform: translateX(4px);
+        }
+
+        /* Scroll indicator */
+        .scroll-hint {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .scroll-hint i {
+            font-size: 1.5rem;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(8px); }
+        }
+
+        /* ===== TARJETAS GLASS ===== */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(212,175,55,0.5), 
+                rgba(192,192,192,0.3), 
+                transparent);
+        }
+
+        .glass-card:hover {
+            background: var(--glass-bg-hover);
+            border-color: var(--glass-border-bright);
+            transform: translateY(-8px);
+            box-shadow: 
+                0 20px 60px rgba(0,0,0,0.4),
+                0 0 30px rgba(212,175,55,0.1),
+                inset 0 1px 0 rgba(255,255,255,0.05);
+        }
+
+        /* ===== SECCIONES ===== */
+        section {
+            position: relative;
+            z-index: 10;
+            padding: 8rem 4rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-label {
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--chrome-copper);
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 300;
+            line-height: 1.1;
+        }
+
+        .section-title span {
+            font-style: italic;
+            color: var(--chrome-gold);
+        }
+
+        /* ===== ABOUT ===== */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-image-frame {
+            aspect-ratio: 3/4;
+            border-radius: 24px;
+            background: linear-gradient(135deg, 
+                rgba(212,175,55,0.1), 
+                rgba(198,123,92,0.1), 
+                rgba(192,192,192,0.1));
+            border: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .about-image-frame::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, 
+                transparent 40%, 
+                rgba(212,175,55,0.1) 50%, 
+                transparent 60%);
+            animation: chromeSheen 4s ease-in-out infinite;
+        }
+
+        @keyframes chromeSheen {
+            0%, 100% { transform: translateX(-100%) rotate(45deg); }
+            50% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        .about-image-placeholder {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 6rem;
+            font-weight: 300;
+            color: var(--text-muted);
+            opacity: 0.3;
+        }
+
+        .about-text {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: var(--text-secondary);
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: 16px;
+            background: linear-gradient(135deg, rgba(212,175,55,0.05), transparent);
+            border: 1px solid rgba(212,175,55,0.1);
+        }
+
+        .stat-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--chrome-gold), var(--chrome-silver));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 0.5rem;
+        }
+
+        /* ===== SKILLS ===== */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .skill-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(30px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(212,175,55,0.05), 
+                transparent);
+            transition: left 0.6s ease;
+        }
+
+        .skill-card:hover::before {
+            left: 100%;
+        }
+
+        .skill-card:hover {
+            border-color: var(--glass-border-bright);
+            transform: translateY(-6px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3), 0 0 20px rgba(212,175,55,0.08);
+        }
+
+        .skill-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(198,123,92,0.1));
+            border: 1px solid rgba(212,175,55,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+            font-size: 1.5rem;
+            color: var(--chrome-gold);
+            transition: all 0.4s ease;
+        }
+
+        .skill-card:hover .skill-icon {
+            background: linear-gradient(135deg, rgba(212,175,55,0.25), rgba(198,123,92,0.2));
+            box-shadow: 0 0 20px rgba(212,175,55,0.15);
+            transform: scale(1.1);
+        }
+
+        .skill-name {
+            font-weight: 600;
+            font-size: 1.05rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .skill-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* ===== EXPERIENCE ===== */
+        .timeline {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 24px;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: linear-gradient(180deg, 
+                var(--chrome-gold), 
+                var(--chrome-copper), 
+                transparent);
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .timeline-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--bg-deep);
+            border: 2px solid var(--chrome-gold);
+            flex-shrink: 0;
+            margin-top: 4px;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 0 10px rgba(212,175,55,0.3);
+        }
+
+        .timeline-content {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            flex: 1;
+            transition: all 0.4s ease;
+        }
+
+        .timeline-content:hover {
+            border-color: var(--glass-border-bright);
+            transform: translateX(8px);
+        }
+
+        .timeline-date {
+            font-size: 0.75rem;
+            color: var(--chrome-copper);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-company {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .timeline-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        /* ===== PROJECTS ===== */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            aspect-ratio: 16/10;
+            background: linear-gradient(135deg, var(--bg-elevated), #1a1a25);
+            border: 1px solid var(--glass-border);
+            cursor: pointer;
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .project-card:hover {
+            transform: scale(1.02) translateY(-8px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4), 0 0 40px rgba(212,175,55,0.1);
+            border-color: var(--glass-border-bright);
+        }
+
+        .project-card-bg {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            color: var(--text-muted);
+            opacity: 0.15;
+        }
+
+        .project-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 30%, rgba(10,10,15,0.95) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2rem;
+            transition: all 0.4s ease;
+        }
+
+        .project-card:hover .project-overlay {
+            background: linear-gradient(180deg, rgba(10,10,15,0.3) 0%, rgba(10,10,15,0.95) 100%);
+        }
+
+        .project-tag {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: rgba(212,175,55,0.15);
+            border: 1px solid rgba(212,175,55,0.3);
+            border-radius: 100px;
+            font-size: 0.7rem;
+            color: var(--chrome-gold);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+            width: fit-content;
+        }
+
+        .project-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* ===== CONTACT ===== */
+        .contact-section {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .contact-email {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 300;
+            color: var(--chrome-gold);
+            text-decoration: none;
+            display: inline-block;
+            margin: 2rem 0;
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        .contact-email::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: linear-gradient(90deg, var(--chrome-gold), var(--chrome-silver));
+            transition: width 0.4s ease;
+        }
+
+        .contact-email:hover {
+            text-shadow: 0 0 30px rgba(212,175,55,0.3);
+        }
+
+        .contact-email:hover::after {
+            width: 100%;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .social-link {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 1.4rem;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(212,175,55,0.2), rgba(198,123,92,0.1));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .social-link:hover {
+            border-color: var(--chrome-gold);
+            color: var(--chrome-gold);
+            transform: translateY(-4px) scale(1.1);
+            box-shadow: 0 10px 30px rgba(212,175,55,0.15);
+        }
+
+        .social-link:hover::before {
+            opacity: 1;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            padding: 4rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .footer-text {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 1.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            section {
+                padding: 5rem 1.5rem;
+            }
+
+            .hero {
+                padding: 0 1.5rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .about-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline::before {
+                left: 12px;
+            }
+
+            .timeline-item {
+                gap: 1rem;
+            }
+        }
+
+        /* ===== SCROLL REVEAL ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Orbes cromados de fondo -->
+    <div class="chrome-orb chrome-orb-1"></div>
+    <div class="chrome-orb chrome-orb-2"></div>
+    <div class="chrome-orb chrome-orb-3"></div>
+
+    <!-- Navbar -->
+    <nav>
+        <div class="nav-logo">AVRIL VELASCO</div>
+        <ul class="nav-links">
+            <li><a href="#about">Sobre mí</a></li>
+            <li><a href="#skills">Habilidades</a></li>
+            <li><a href="#experience">Experiencia</a></li>
+            <li><a href="#projects">Proyectos</a></li>
+            <li><a href="#contact">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-label">Community Manager & Marketing Digital</div>
+            <h1 class="hero-title">
+                Transformo ideas<br>en <span class="highlight">experiencias visuales</span>
+            </h1>
+            <p class="hero-subtitle">
+                Estudiante de Negocios Internacionales en USFQ. 
+                Community Manager en Growix SA. 
+                Diseño contenido que conecta marcas con personas.
+            </p>
+            <a href="#projects" class="hero-cta">
+                Ver mi trabajo <i class="ph ph-arrow-right"></i>
+            </a>
+        </div>
+        <div class="scroll-hint">
+            <span>Descubrir</span>
+            <i class="ph ph-caret-down"></i>
+        </div>
+    </section>
+
+    <div class="chrome-line"></div>
+
+    <!-- About -->
+    <section id="about">
+        <div class="section-header reveal">
+            <div class="section-label">01 — Sobre mí</div>
+            <h2 class="section-title">Creadora de <span>contenido con propósito</span></h2>
+        </div>
+        <div class="about-grid">
+            <div class="about-image reveal">
+                <div class="about-image-frame">
+                    <span class="about-image-placeholder">AV</span>
+                </div>
+            </div>
+            <div class="about-text reveal">
+                <p>
+                    Tengo 22 años y vivo en Quito, Ecuador. Combino mi formación en 
+                    <strong>Negocios Internacionales</strong> en la USFQ con mi pasión por el 
+                    <strong>marketing digital</strong> y el diseño visual.
+                </p>
+                <p>
+                    Como Community Manager en <strong>Growix SA</strong>, gestiono estrategias de 
+                    contenido, analizo métricas de engagement y diseño campañas que generan 
+                    resultados reales. Domino herramientas como Photoshop, Illustrator, Canva 
+                    y CapCut para crear contenido que destaca.
+                </p>
+                <p>
+                    Hablo <strong>inglés nivel B2</strong> y tengo nociones de portugués, 
+                    lo que me permite trabajar con equipos internacionales y marcas globales.
+                </p>
+                <div class="about-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">B2</div>
+                        <div class="stat-label">Inglés</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Países</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">5+</div>
+                        <div class="stat-label">Herramientas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="chrome-line"></div>
+
+    <!-- Skills -->
+    <section id="skills">
+        <div class="section-header reveal">
+            <div class="section-label">02 — Habilidades</div>
+            <h2 class="section-title">Mi <span>arsenal creativo</span></h2>
+        </div>
+        <div class="skills-grid">
+            <div class="skill-card reveal">
+                <div class="skill-icon"><i class="ph ph-paint-brush"></i></div>
+                <div class="skill-name">Adobe Photoshop</div>
+                <div class="skill-desc">Edición avanzada de imágenes, retoque fotográfico y composición visual</div>
+            </div>
+            <div class="skill-card reveal">
+                <div class="skill-icon"><i class="ph ph-pen-nib"></i></div>
+                <div class="skill-name">Adobe Illustrator</div>
+                <div class="skill-desc">Diseño vectorial, branding e ilustración profesional</div>
+            </div>
+            <div class="skill-card reveal">
+                <div class="skill-icon"><i class="ph ph-palette"></i></div>
+                <div class="skill-name">Canva</div>
+                <div class="skill-desc">Diseño rápido de contenido social, presentaciones y materiales de marca</div>
+            </div>
+            <div class="skill-card reveal">
+                <div class="skill-icon"><i class="ph ph-video-camera"></i></div>
+                <div class="skill-name">CapCut</div>
+                <div class="skill-desc">Edición de video vertical, reels y contenido para TikTok/Instagram</div>
+            </div>
+            <div class="skill-card reveal">
+                <div class="skill-icon"><i class="ph ph-blueprint"></i></div>
+                <div class="skill-name">AutoCAD</div>
+                <div class="skill-desc">Dibujo técnico, planos arquitectónicos y diseño espacial</div>
+            </div>
+            <div class="skill-card reveal">
+                <div class="skill-icon"><i class="ph ph-chart-line-up"></i></div>
+                <div class="skill-name">Análisis de Métricas</div>
+                <div class="skill-desc">Interpretación de datos de engagement, alcance y conversión</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="chrome-line"></div>
+
+    <!-- Experience -->
+    <section id="experience">
+        <div class="section-header reveal">
+            <div class="section-label">03 — Trayectoria</div>
+            <h2 class="section-title">Mi <span>camino profesional</span></h2>
+        </div>
+        <div class="timeline">
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">2024 — Presente</div>
+                    <div class="timeline-title">Community Manager & Marketing Digital</div>
+                    <div class="timeline-company">Growix SA — Quito, Ecuador</div>
+                    <div class="timeline-desc">
+                        Gestión de redes sociales, creación de contenido visual, 
+                        análisis de métricas y estrategias de engagement. 
+                        Incremento del alcance orgánico en un 40%.
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">2022 — 2026</div>
+                    <div class="timeline-title">Negocios Internacionales</div>
+                    <div class="timeline-company">Universidad San Francisco de Quito (USFQ)</div>
+                    <div class="timeline-desc">
+                        Formación en comercio internacional, estrategia de negocios 
+                        y análisis de mercados globales. Proyectos de consultoría 
+                        para empresas reales.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="chrome-line"></div>
+
+    <!-- Projects -->
+    <section id="projects">
+        <div class="section-header reveal">
+            <div class="section-label">04 — Proyectos</div>
+            <h2 class="section-title">Trabajos que <span>me representan</span></h2>
+        </div>
+        <div class="projects-grid">
+            <div class="project-card reveal">
+                <div class="project-card-bg">GV</div>
+                <div class="project-overlay">
+                    <span class="project-tag">Social Media</span>
+                    <div class="project-title">Growix Social Media</div>
+                    <div class="project-desc">Gestión completa de redes y estrategia de contenido</div>
+                </div>
+            </div>
+            <div class="project-card reveal">
+                <div class="project-card-bg">PE</div>
+                <div class="project-overlay">
+                    <span class="project-tag">Video</span>
+                    <div class="project-title">Predios Ecuador</div>
+                    <div class="project-desc">Producción audiovisual para plataforma inmobiliaria</div>
+                </div>
+            </div>
+            <div class="project-card reveal">
+                <div class="project-card-bg">EC</div>
+                <div class="project-overlay">
+                    <span class="project-tag">Branding</span>
+                    <div class="project-title">Expo Calidad Educativa</div>
+                    <div class="project-desc">Diseño de identidad visual para evento educativo</div>
+                </div>
+            </div>
+            <div class="project-card reveal">
+                <div class="project-card-bg">BP</div>
+                <div class="project-overlay">
+                    <span class="project-tag">Personal</span>
+                    <div class="project-title">Branding Personal</div>
+                    <div class="project-desc">Construcción de marca personal y presencia digital</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="chrome-line"></div>
+
+    <!-- Contact -->
+    <section id="contact">
+        <div class="section-header reveal">
+            <div class="section-label">05 — Contacto</div>
+            <h2 class="section-title">Trabajemos <span>juntos</span></h2>
+        </div>
+        <div class="contact-section reveal">
+            <p style="color: var(--text-secondary); font-size: 1.05rem; line-height: 1.8; margin-bottom: 2rem;">
+                ¿Tienes un proyecto en mente? <br>
+                Estoy lista para crear algo extraordinario contigo.
+            </p>
+            <a href="mailto:avrilvelasco@gmail.com" class="contact-email">avrilvelasco@gmail.com</a>
+            <div style="color: var(--text-muted); font-size: 0.9rem; margin-top: 1rem;">
+                <i class="ph ph-whatsapp-logo" style="vertical-align: middle; margin-right: 0.5rem;"></i>
+                +593 99 956 8215
+            </div>
+            <div class="social-links">
+                <a href="#" class="social-link" title="LinkedIn"><i class="ph ph-linkedin-logo"></i></a>
+                <a href="#" class="social-link" title="Instagram"><i class="ph ph-instagram-logo"></i></a>
+                <a href="#" class="social-link" title="TikTok"><i class="ph ph-tiktok-logo"></i></a>
+                <a href="#" class="social-link" title="Behance"><i class="ph ph-behance-logo"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-text">
+            AVRIL VELASCO — 2026 · Diseñado con propósito
+        </div>
+    </footer>
+
+    <script>
+        // Scroll reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Smooth scroll para nav links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Efecto parallax sutil en orbes
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            document.querySelectorAll('.chrome-orb').forEach((orb, i) => {
+                const speed = 0.1 + (i * 0.05);
+                orb.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Avril Velasco</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  font-family:'Inter',sans-serif;
+  background:#080808;
+  color:#F0EBE5;
+}
+
+/* FONDO: gradiente dorado animado con CSS puro */
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  background:
+    radial-gradient(ellipse at 20% 30%, rgba(212,175,55,.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 70%, rgba(198,123,92,.1) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(212,175,55,.05) 0%, transparent 70%),
+    #080808;
+  animation:bgShift 15s ease-in-out infinite;
+}
+@keyframes bgShift{
+  0%,100%{background-position:0% 0%,100% 100%,50% 50%}
+  50%{background-position:100% 100%,0% 0%,50% 50%}
+}
+
+/* NAV */
+.nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:2rem 4rem;
+}
+.nav-logo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:.85rem;
+  letter-spacing:5px;
+  text-transform:uppercase;
+}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{
+  color:#999490;
+  text-decoration:none;
+  font-size:.7rem;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  transition:color .3s;
+}
+.nav-links a:hover{color:#D4AF37}
+
+/* HERO */
+.hero{
+  min-height:85vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:0 4rem 4rem;
+}
+.hero-label{
+  font-size:.65rem;
+  letter-spacing:6px;
+  text-transform:uppercase;
+  color:#C67B5C;
+  margin-bottom:2rem;
+}
+.hero-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(3.5rem,10vw,9rem);
+  font-weight:300;
+  line-height:.95;
+  letter-spacing:-.02em;
+  color:#FFF;
+  text-shadow:0 2px 40px rgba(0,0,0,.8);
+}
+.hero-title em{
+  font-style:italic;
+  color:#D4AF37;
+}
+.hero-sub{
+  margin-top:2rem;
+  max-width:420px;
+  font-size:.9rem;
+  line-height:1.8;
+  color:#B0ABA6;
+}
+.hero-cta{
+  display:inline-block;
+  margin-top:2rem;
+  padding:.9rem 2rem;
+  border:1px solid rgba(212,175,55,.4);
+  border-radius:100px;
+  color:#D4AF37;
+  text-decoration:none;
+  font-size:.75rem;
+  letter-spacing:3px;
+  text-transform:uppercase;
+}
+.hero-cta:hover{background:rgba(212,175,55,.1)}
+
+/* SECTIONS */
+.section{padding:6rem 4rem}
+.section-label{
+  font-size:.6rem;
+  letter-spacing:6px;
+  text-transform:uppercase;
+  color:#C67B5C;
+  margin-bottom:1rem;
+}
+.section-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.5rem,5vw,4.5rem);
+  font-weight:300;
+  line-height:1.05;
+  margin-bottom:3rem;
+  color:#FFF;
+}
+.section-title em{font-style:italic;color:#D4AF37}
+
+/* TABS */
+.tabs{display:flex;gap:2rem;margin-bottom:2.5rem;border-bottom:1px solid rgba(212,175,55,.12);flex-wrap:wrap}
+.tab{
+  font-size:.7rem;letter-spacing:3px;text-transform:uppercase;
+  color:#999490;padding-bottom:1rem;cursor:pointer;
+  background:none;border:none;font-family:'Inter',sans-serif;
+  position:relative;
+}
+.tab.active{color:#D4AF37}
+.tab::after{content:'';position:absolute;bottom:-1px;left:0;width:0;height:1px;background:#D4AF37;transition:width .4s}
+.tab.active::after{width:100%}
+.tab:hover{color:#F0EBE5}
+
+.tab-content{display:none}
+.tab-content.active{display:block}
+
+/* GALLERY */
+.gallery-wrap{overflow-x:auto;scrollbar-width:none}
+.gallery-wrap::-webkit-scrollbar{display:none}
+.gallery{display:flex;gap:1.5rem}
+
+.project-card{
+  flex-shrink:0;width:300px;aspect-ratio:1;
+  background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01));
+  border:1px solid rgba(212,175,55,.1);border-radius:8px;
+  position:relative;overflow:hidden;
+  transition:border-color .4s,transform .4s;
+}
+.project-card:hover{border-color:rgba(212,175,55,.35);transform:translateY(-6px)}
+.project-placeholder{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;font-size:4rem;
+  color:#4A4540;opacity:.3;
+}
+.project-info{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:1.5rem;
+  background:linear-gradient(180deg,transparent,rgba(8,8,8,.95));
+}
+.project-tag{font-size:.6rem;letter-spacing:3px;text-transform:uppercase;color:#D4AF37;margin-bottom:.5rem}
+.project-name{font-family:'Cormorant Garamond',serif;font-size:1.3rem}
+.project-desc{font-size:.8rem;color:#999490;margin-top:.3rem}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;max-width:1100px;margin:0 auto;align-items:center}
+.about-text{font-size:.9rem;line-height:1.9;color:#B0ABA6}
+.about-text p{margin-bottom:1.5rem}
+.about-text strong{color:#F0EBE5;font-weight:400}
+.about-stats{display:flex;gap:3rem;margin-top:3rem}
+.about-stats .num{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:300;color:#D4AF37}
+.about-stats .label{font-size:.6rem;letter-spacing:3px;text-transform:uppercase;color:#4A4540;margin-top:.3rem}
+.about-visual{
+  aspect-ratio:3/4;
+  background:linear-gradient(180deg,rgba(212,175,55,.06),rgba(212,175,55,.02));
+  border:1px solid rgba(212,175,55,.1);border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+}
+.about-visual span{font-family:'Cormorant Garamond',serif;font-size:6rem;color:#4A4540;opacity:.2}
+
+/* CONTACT */
+.contact-section{text-align:center;padding:6rem 4rem}
+.contact-email{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2rem,4vw,3.5rem);font-weight:300;
+  color:#D4AF37;text-decoration:none;display:inline-block;margin:1.5rem 0;
+}
+.contact-social{display:flex;justify-content:center;gap:2.5rem;margin-top:3rem}
+.contact-social a{color:#999490;text-decoration:none;font-size:.7rem;letter-spacing:3px;text-transform:uppercase;transition:color .3s}
+.contact-social a:hover{color:#D4AF37}
+
+.footer{text-align:center;padding:3rem;font-size:.6rem;letter-spacing:4px;text-transform:uppercase;color:#4A4540}
+
+@media(max-width:768px){
+  .nav{padding:1.5rem}
+  .nav-links{display:none}
+  .hero{padding:0 1.5rem 3rem;min-height:70vh}
+  .section{padding:4rem 1.5rem}
+  .about-grid{grid-template-columns:1fr;gap:3rem}
+  .project-card{width:260px}
+  .contact-section{padding:4rem 1.5rem}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-logo">Avril Velasco</div>
+  <ul class="nav-links">
+    <li><a href="#work">Trabajo</a></li>
+    <li><a href="#about">Sobre</a></li>
+    <li><a href="#contact">Contacto</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-label">Community Manager & Marketing Digital</div>
+  <h1 class="hero-title">Creadora de<br><em>experiencias</em><br>visuales</h1>
+  <p class="hero-sub">Transformo marcas en presencia digital. Diseño contenido que conecta, engagea y convierte.</p>
+  <a href="#work" class="hero-cta">Ver trabajo</a>
+</section>
+
+<section class="section" id="work">
+  <div class="section-label">Trabajo</div>
+  <h2 class="section-title">Mi <em>portfolio</em></h2>
+  
+  <div class="tabs">
+    <button class="tab active" data-tab="social">Social Media</button>
+    <button class="tab" data-tab="design">Diseño Gráfico</button>
+    <button class="tab" data-tab="video">Video / Reels</button>
+    <button class="tab" data-tab="branding">Branding</button>
+  </div>
+
+  <div class="tab-content active" id="tab-social">
+    <div class="gallery-wrap">
+      <div class="gallery">
+        <div class="project-card"><div class="project-placeholder">G</div><div class="project-info"><div class="project-tag">Instagram</div><div class="project-name">Growix SA</div><div class="project-desc">Gestión de redes y contenido</div></div></div>
+        <div class="project-card"><div class="project-placeholder">C</div><div class="project-info"><div class="project-tag">Strategy</div><div class="project-name">Campaña Q4</div><div class="project-desc">Calendario editorial + métricas</div></div></div>
+        <div class="project-card"><div class="project-placeholder">T</div><div class="project-info"><div class="project-tag">TikTok</div><div class="project-name">Short Form</div><div class="project-desc">Videos virales marca local</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-content" id="tab-design">
+    <div class="gallery-wrap">
+      <div class="gallery">
+        <div class="project-card"><div class="project-placeholder">P</div><div class="project-info"><div class="project-tag">Photoshop</div><div class="project-name">Posters Digitales</div><div class="project-desc">Flyers eventos corporativos</div></div></div>
+        <div class="project-card"><div class="project-placeholder">I</div><div class="project-info"><div class="project-tag">Illustrator</div><div class="project-name">Identidad Visual</div><div class="project-desc">Logo y aplicaciones marca</div></div></div>
+        <div class="project-card"><div class="project-placeholder">C</div><div class="project-info"><div class="project-tag">Canva</div><div class="project-name">Social Templates</div><div class="project-desc">Kit plantillas Instagram</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-content" id="tab-video">
+    <div class="gallery-wrap">
+      <div class="gallery">
+        <div class="project-card"><div class="project-placeholder">R</div><div class="project-info"><div class="project-tag">CapCut</div><div class="project-name">Reels Growix</div><div class="project-desc">Serie 12 reels +50K views</div></div></div>
+        <div class="project-card"><div class="project-placeholder">V</div><div class="project-info"><div class="project-tag">Video</div><div class="project-name">Predios Ecuador</div><div class="project-desc">Producción audiovisual</div></div></div>
+        <div class="project-card"><div class="project-placeholder">T</div><div class="project-info"><div class="project-tag">TikTok</div><div class="project-name">Trend Series</div><div class="project-desc">Adaptación trends marca</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-content" id="tab-branding">
+    <div class="gallery-wrap">
+      <div class="gallery">
+        <div class="project-card"><div class="project-placeholder">B</div><div class="project-info"><div class="project-tag">Branding</div><div class="project-name">Marca Personal</div><div class="project-desc">Identidad digital</div></div></div>
+        <div class="project-card"><div class="project-placeholder">E</div><div class="project-info"><div class="project-tag">Evento</div><div class="project-name">Expo Calidad</div><div class="project-desc">Identidad evento nacional</div></div></div>
+        <div class="project-card"><div class="project-placeholder">G</div><div class="project-info"><div class="project-tag">Guidelines</div><div class="project-name">Manual de Marca</div><div class="project-desc">Sistema diseño completo</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="about">
+  <div class="about-grid">
+    <div>
+      <div class="section-label">Sobre mí</div>
+      <h2 class="section-title">Negocios con<br><em>alma creativa</em></h2>
+      <div class="about-text">
+        <p>Estudiante de <strong>Negocios Internacionales</strong> en la USFQ. Community Manager en <strong>Growix SA</strong>.</p>
+        <p>Diseño contenido que conecta marcas con personas reales. Desde Photoshop hasta CapCut, cada herramienta es un medio para contar historias visuales.</p>
+      </div>
+      <div class="about-stats">
+        <div><div class="num">B2</div><div class="label">Inglés</div></div>
+        <div><div class="num">3</div><div class="label">Países</div></div>
+        <div><div class="num">5+</div><div class="label">Tools</div></div>
+      </div>
+    </div>
+    <div class="about-visual"><span>AV</span></div>
+  </div>
+</section>
+
+<section class="contact-section" id="contact">
+  <div class="section-label">Contacto</div>
+  <a href="mailto:info@avrilvelasco.com" class="contact-email">info@avrilvelasco.com</a>
+  <div class="contact-social">
+    <a href="#">LinkedIn</a>
+    <a href="#">Instagram</a>
+    <a href="#">TikTok</a>
+    <a href="#">Behance</a>
+  </div>
+</section>
+
+<footer class="footer">Avril Velasco — 2026</footer>
+
+<script>
+document.querySelectorAll('.tab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('tab-'+tab.dataset.tab).classList.add('active');
+  });
+});
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    e.preventDefault();
+    document.querySelector(a.getAttribute('href')).scrollIntoView({behavior:'smooth'});
+  });
+});
+</script>
+</body>
+</html>

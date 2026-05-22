@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>Avril Velasco — Hoja de Vida</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: #fff;
+    color: #2c2c2c;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Header verde salvia como el PDF */
+  .cv-header {
+    background: #8A9A7E;
+    border-radius: 0 40px 40px 0;
+    margin: 30px 30px 0 0;
+    padding: 30px 50px;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    position: relative;
+  }
+  .cv-photo {
+    width: 160px; height: 160px;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #fff;
+    flex-shrink: 0;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  }
+  .cv-photo img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+  }
+  .cv-name {
+    color: #fff;
+  }
+  .cv-name h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.2rem;
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: 3px;
+  }
+
+  /* Layout dos columnas */
+  .cv-body {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 50px;
+    padding: 40px 50px 60px;
+    max-width: 1100px;
+  }
+
+  .cv-col-left, .cv-col-right {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+  }
+
+  .cv-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #8A9A7E;
+    display: inline-block;
+  }
+
+  /* Contacto */
+  .cv-contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 14px;
+    font-size: 0.9rem;
+    color: #444;
+  }
+  .cv-contact-item i {
+    color: #8A9A7E;
+    font-size: 1rem;
+    margin-top: 3px;
+    width: 20px;
+    text-align: center;
+  }
+
+  /* Educación */
+  .cv-edu-item {
+    margin-bottom: 18px;
+  }
+  .cv-edu-item h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #2c2c2c;
+    margin-bottom: 3px;
+  }
+  .cv-edu-item p {
+    font-size: 0.88rem;
+    color: #666;
+    margin-bottom: 2px;
+  }
+  .cv-edu-item .status {
+    font-size: 0.82rem;
+    color: #8A9A7E;
+    font-weight: 500;
+  }
+
+  /* Sobre mí */
+  .cv-text {
+    font-size: 0.92rem;
+    color: #444;
+    line-height: 1.8;
+    text-align: justify;
+    margin-bottom: 14px;
+  }
+
+  /* Experiencia */
+  .cv-exp-item {
+    margin-bottom: 22px;
+  }
+  .cv-exp-item h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #2c2c2c;
+    margin-bottom: 2px;
+  }
+  .cv-exp-item .company {
+    font-size: 0.85rem;
+    color: #8A9A7E;
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+  .cv-exp-item ul {
+    list-style: disc;
+    padding-left: 18px;
+    font-size: 0.88rem;
+    color: #555;
+    line-height: 1.7;
+  }
+  .cv-exp-item ul li {
+    margin-bottom: 3px;
+  }
+
+  /* Skills */
+  .cv-skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  .cv-skill {
+    font-size: 0.85rem;
+    color: #444;
+    padding: 6px 0;
+    border-bottom: 1px dotted #ddd;
+  }
+
+  /* Idiomas */
+  .cv-lang {
+    display: flex;
+    gap: 30px;
+  }
+  .cv-lang-item {
+    text-align: center;
+  }
+  .cv-lang-item .level {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #8A9A7E;
+  }
+  .cv-lang-item .name {
+    font-size: 0.8rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* Botón volver */
+  .cv-actions {
+    padding: 0 50px 40px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .cv-btn {
+    padding: 12px 28px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-decoration: none;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 0;
+  }
+  .cv-btn-primary {
+    background: #8A9A7E;
+    color: #fff;
+    border: 1px solid #8A9A7E;
+  }
+  .cv-btn-primary:hover {
+    background: #6d7a63;
+  }
+  .cv-btn-outline {
+    background: transparent;
+    color: #8A9A7E;
+    border: 1px solid #8A9A7E;
+  }
+  .cv-btn-outline:hover {
+    background: #8A9A7E;
+    color: #fff;
+  }
+
+  @media (max-width: 768px) {
+    .cv-header {
+      margin: 15px 15px 0 0;
+      padding: 20px 25px;
+      flex-direction: column;
+      text-align: center;
+      gap: 20px;
+    }
+    .cv-name h1 { font-size: 2.2rem; }
+    .cv-body {
+      grid-template-columns: 1fr;
+      padding: 30px 25px;
+      gap: 30px;
+    }
+    .cv-actions { padding: 0 25px 30px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Header verde salvia con foto -->
+<div class="cv-header">
+  <div class="cv-photo">
+    <img src="assets/avril-foto-cv.png" alt="Avril Velasco">
+  </div>
+  <div class="cv-name">
+    <h1>AVRIL<br>VELASCO</h1>
+  </div>
+</div>
+
+<!-- Dos columnas -->
+<div class="cv-body">
+  <div class="cv-col-left">
+
+    <div class="cv-section">
+      <h2>Contacto</h2>
+      <div class="cv-contact-item">
+        <i class="fas fa-phone"></i>
+        <span>099 956 8215</span>
+      </div>
+      <div class="cv-contact-item">
+        <i class="fas fa-envelope"></i>
+        <span>avrilvelasco@gmail.com</span>
+      </div>
+      <div class="cv-contact-item">
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Quito — Ecuador</span>
+      </div>
+    </div>
+
+    <div class="cv-section">
+      <h2>Educación</h2>
+      <div class="cv-edu-item">
+        <h3>Negocios Internacionales</h3>
+        <p>Universidad San Francisco de Quito</p>
+        <p class="status">En curso · 5 semestres cursados</p>
+      </div>
+      <div class="cv-edu-item">
+        <h3>Arquitectura</h3>
+        <p>Universidad UTE</p>
+        <p class="status">En curso</p>
+      </div>
+      <div class="cv-edu-item">
+        <h3>Educación Secundaria</h3>
+        <p class="status">Completada</p>
+      </div>
+    </div>
+
+    <div class="cv-section">
+      <h2>Idiomas</h2>
+      <div class="cv-lang">
+        <div class="cv-lang-item">
+          <div class="level">Nativo</div>
+          <div class="name">Español</div>
+        </div>
+        <div class="cv-lang-item">
+          <div class="level">B2</div>
+          <div class="name">Inglés</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cv-section">
+      <h2>Skills Técnicas</h2>
+      <div class="cv-skills-grid">
+        <div class="cv-skill">Photoshop</div>
+        <div class="cv-skill">Illustrator</div>
+        <div class="cv-skill">Canva Pro</div>
+        <div class="cv-skill">CapCut</div>
+        <div class="cv-skill">AutoCAD</div>
+        <div class="cv-skill">Meta Business</div>
+        <div class="cv-skill">Metricool</div>
+        <div class="cv-skill">ChatGPT / Claude</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="cv-col-right">
+
+    <div class="cv-section">
+      <h2>Sobre Mí</h2>
+      <p class="cv-text">
+        Estudiante de Negocios Internacionales con experiencia en atención al cliente, marketing digital y promoción de servicios. He participado en procesos de innovación y mejora continua enfocados en la experiencia del cliente, desarrollando estrategias de comunicación y contenido en entornos dinámicos.
+      </p>
+      <p class="cv-text">
+        Cuento con experiencia internacional trabajando en Ecuador, Colombia y Estados Unidos, lo que me ha permitido fortalecer mis habilidades de adaptación, comunicación y servicio en contextos multiculturales.
+      </p>
+    </div>
+
+    <div class="cv-section">
+      <h2>Experiencia</h2>
+      <div class="cv-exp-item">
+        <h3>Community Manager / Marketing Digital</h3>
+        <div class="company">Growix · Ecuador / Colombia / USA · Actualidad</div>
+        <ul>
+          <li>Gestión de redes sociales y atención a clientes en mercados de Ecuador y Colombia</li>
+          <li>Creación de contenido estratégico enfocado en engagement y conversión</li>
+          <li>Participación en mejora de procesos de comunicación y experiencia del cliente</li>
+          <li>Coordinación de campañas digitales para repuestos automotrices, retail y Trendverse</li>
+        </ul>
+      </div>
+      <div class="cv-exp-item">
+        <h3>Atención al Cliente / Supply Chain</h3>
+        <div class="company">Growix · Colombia</div>
+        <ul>
+          <li>Comunicación con clientes sobre pedidos y procesos logísticos internacionales</li>
+          <li>Seguimiento de envíos y resolución de incidencias de importación</li>
+          <li>Coordinación para mejorar tiempos de respuesta y satisfacción del cliente</li>
+        </ul>
+      </div>
+      <div class="cv-exp-item">
+        <h3>Expositora</h3>
+        <div class="company">Feria Expo Calidad Educativa · Liceo BYS / ITSEIA</div>
+        <ul>
+          <li>Presentación de programas educativos a potenciales clientes</li>
+          <li>Interacción con alto volumen de personas en eventos presenciales</li>
+        </ul>
+      </div>
+      <div class="cv-exp-item">
+        <h3>Asistente en Arquitectura / Construcción</h3>
+        <div class="company">Práctica profesional</div>
+        <ul>
+          <li>Apoyo en tareas técnicas y manejo de planos</li>
+          <li>Uso de AutoCAD, Illustrator y Photoshop para documentación visual técnica</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="cv-section">
+      <h2>Habilidades Blandas</h2>
+      <div class="cv-skills-grid">
+        <div class="cv-skill">Atención al cliente</div>
+        <div class="cv-skill">Comunicación</div>
+        <div class="cv-skill">Ventas</div>
+        <div class="cv-skill">Adaptabilidad</div>
+        <div class="cv-skill">Resolución de problemas</div>
+        <div class="cv-skill">Trabajo en equipo</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Botones -->
+<div class="cv-actions">
+  <a href="assets/hoja-de-vida-avril.pdf" class="cv-btn cv-btn-primary" download>
+    <i class="fas fa-download"></i> Descargar PDF
+  </a>
+  <a href="v9-tabs.html" class="cv-btn cv-btn-outline">
+    <i class="fas fa-arrow-left"></i> Volver al Portfolio
+  </a>
+</div>
+
+</body>
+</html>

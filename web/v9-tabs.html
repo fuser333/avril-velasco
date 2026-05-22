@@ -80,6 +80,70 @@
             letter-spacing: 4px;
             color: var(--charcoal);
         }
+        .mag-nav-center {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+        .main-tab {
+            padding: 0.6rem 1.8rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: transparent;
+            border: 1px solid transparent;
+            color: var(--warm-gray);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .main-tab:hover { color: var(--charcoal); }
+        .main-tab.active {
+            color: var(--charcoal);
+            border-color: var(--charcoal);
+            background: var(--cream);
+        }
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; }
+        .hero-photo {
+            width: 140px; height: 140px;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #fff;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+            border: 4px solid #fff;
+            margin-bottom: 2rem;
+        }
+        .hero-photo img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            object-position: center 15%;
+            display: block;
+        }
+        .hero-photo-blob {
+            width: 320px;
+            height: 380px;
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15), 0 0 0 12px rgba(255,255,255,0.15), 0 0 0 24px rgba(255,255,255,0.08);
+            animation: blobMorph 8s ease-in-out infinite;
+            position: relative;
+            z-index: 2;
+        }
+        .hero-photo-blob img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 10%;
+            display: block;
+        }
+        @keyframes blobMorph {
+            0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+            25% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+            50% { border-radius: 50% 60% 30% 60% / 30% 60% 70% 40%; }
+            75% { border-radius: 60% 40% 60% 30% / 70% 30% 50% 60%; }
+        }
         .mag-nav-links {
             display: flex;
             gap: 3rem;
@@ -124,6 +188,10 @@
             font-size: 1.5rem;
             cursor: pointer;
         }
+        @media (max-width: 768px) {
+            .mag-nav-center { display: none; }
+            .mobile-toggle { display: block; }
+        }
 
         .mag-hero {
             min-height: 100vh;
@@ -135,9 +203,41 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 8rem 6rem;
+            padding: 7.5rem 6rem 4rem;
             position: relative;
             z-index: 2;
+        }
+        .mag-hero-right {
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 5rem;
+        }
+        .mag-hero-image {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--rose), var(--sage), var(--terracotta));
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            position: relative;
+            animation: shimmer 8s linear infinite;
+            background-size: 200% 200%;
+            padding-top: 4rem;
+        }
+        .mag-hero-image::before {
+            content: '';
+            position: absolute;
+            inset: 40px;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        .mag-hero-image::after {
+            content: '';
+            position: absolute;
+            inset: 50px;
+            border: 1px solid rgba(255,255,255,0.15);
         }
         .mag-issue {
             font-size: 0.7rem;
@@ -199,33 +299,6 @@
         .mag-cta i { transition: transform 0.3s; }
         .mag-cta:hover i { transform: translateX(5px); }
 
-        .mag-hero-right {
-            position: relative;
-            overflow: hidden;
-        }
-        .mag-hero-image {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, var(--rose), var(--sage), var(--terracotta));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            animation: shimmer 8s linear infinite;
-            background-size: 200% 200%;
-        }
-        .mag-hero-image::before {
-            content: '';
-            position: absolute;
-            inset: 40px;
-            border: 1px solid rgba(255,255,255,0.3);
-        }
-        .mag-hero-image::after {
-            content: '';
-            position: absolute;
-            inset: 50px;
-            border: 1px solid rgba(255,255,255,0.15);
-        }
         .mag-hero-image .center-text {
             font-family: 'Cormorant Garamond', serif;
             font-size: 8rem;
@@ -334,12 +407,14 @@
             inset: 40px;
             border: 1px solid rgba(255,255,255,0.2);
         }
-        .mag-about-image-main span {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 6rem;
-            color: rgba(255,255,255,0.9);
-            z-index: 2;
-            animation: float 5s ease-in-out infinite;
+        .mag-about-image-main img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 10%;
+            display: block;
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            animation: blobMorph 8s ease-in-out infinite;
         }
         .mag-about-image-overlay {
             position: absolute;
@@ -878,8 +953,9 @@
         }
 
         @media (max-width: 1024px) {
-            .mag-hero { grid-template-columns: 1fr; }
+            .mag-hero { grid-template-columns: 1fr; min-height: auto; }
             .mag-hero-right { min-height: 50vh; }
+            .hero-photo-blob { width: 240px; height: 280px; }
             .mag-about { grid-template-columns: 1fr; }
             .mag-depts-grid { grid-template-columns: repeat(2, 1fr); }
             .mag-portfolio-grid { grid-template-columns: repeat(2, 1fr); }
@@ -889,7 +965,7 @@
         @media (max-width: 768px) {
             .mag-nav-links { display: none; }
             .mobile-toggle { display: block; }
-            .mag-hero-left { padding: 6rem 2rem; }
+            .mag-hero-left { padding: 4rem 2rem 3rem; }
             .mag-hero-left h1 { font-size: 3rem; }
             .mag-section, .mag-depts, .mag-portfolio, .mag-contact, .mag-skills, .mag-experience { padding: 5rem 2rem; }
             .mag-depts-grid { grid-template-columns: 1fr; }
@@ -908,20 +984,15 @@
 <body>
     <nav class="mag-nav" id="navbar">
         <div class="mag-logo">AVRiL</div>
-        <ul class="mag-nav-links">
-            <li><a href="#about">Sobre Mí</a></li>
-            <li><a href="#experience">Experiencia</a></li>
-            <li><a href="#portfolio">Portfolio</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#contact" class="mag-nav-cta">Hablemos</a></li>
-        </ul>
-        <div class="mobile-toggle" onclick="document.querySelector('.mag-nav-links').classList.toggle('active')">
-            <i class="fas fa-bars"></i>
+        <div class="mag-nav-center">
+            <button class="main-tab active" data-tab="perfil" onclick="switchTab('perfil')">Perfil</button>
+            <button class="main-tab" data-tab="portfolio" onclick="switchTab('portfolio')">Portfolio</button>
         </div>
+        <a href="v8-hero.html" class="mag-nav-cta">Ver CV</a>
     </nav>
 
     <!-- Hero -->
-    <section class="mag-hero">
+    <section class="mag-hero" id="hero">
         <div class="mag-hero-left">
             <div class="mag-issue">The Creative Issue · Vol. 1 · 2025</div>
             <h1>
@@ -930,36 +1001,37 @@
                 que conecta
             </h1>
             <p class="subtitle">
-                Marketing digital, producción audiovisual y negocios internacionales. 
+                Marketing digital, producción audiovisual y negocios internacionales.
                 Experiencia real en Ecuador, Colombia y USA.
             </p>
             <div class="location">
                 <i class="fas fa-map-marker-alt"></i>
-                <span>Quito, Ecuador · Negocios Internacionales USFQ · 5to semestre</span>
+                <span>Quito, Ecuador · Negocios Internacionales USFQ · Arquitectura UTE</span>
             </div>
-            <a href="#portfolio" class="mag-cta">
-                Ver Mi Trabajo <i class="fas fa-arrow-right"></i>
-            </a>
+            <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+                <a href="v8-hero.html" class="mag-cta">Ver Hoja de Vida <i class="fas fa-arrow-right"></i></a>
+                <a href="#portfolio" class="mag-cta" style="background:transparent; color:var(--charcoal);">Ver Mi Trabajo</a>
+            </div>
         </div>
         <div class="mag-hero-right">
             <div class="mag-hero-image">
-                <div class="center-text">
-                    🌸
-                    <small>Latina Power</small>
+                <div class="hero-photo-blob">
+                    <img src="assets/avril-foto-cv.png" alt="Avril Velasco">
                 </div>
-                <div class="mag-hero-badge">
-                    <div class="label">Disponible</div>
-                    <div class="value">Community Manager & Marketing</div>
-                </div>
+            </div>
+            <div class="mag-hero-badge">
+                <div class="label">Experiencia</div>
+                <div class="value">5+ Años</div>
             </div>
         </div>
     </section>
 
+    <div class="tab-panel active" id="tab-perfil">
     <!-- About -->
     <section class="mag-about" id="about">
         <div class="mag-about-image sr-left">
             <div class="mag-about-image-main">
-                <span>👩🏻‍💻</span>
+                <img src="assets/avril-foto-cv.png" alt="Avril Velasco">
             </div>
             <div class="mag-about-image-overlay">
                 <div class="quote">"Si no te han bloqueado de una red social, es que no has creado contenido suficiente."</div>
@@ -1074,6 +1146,8 @@
         </div>
     </section>
 
+    </div>
+    <div class="tab-panel" id="tab-portfolio">
     <!-- Portfolio -->
     <section class="mag-portfolio" id="portfolio">
         <div class="mag-portfolio-header sr">
@@ -1199,7 +1273,7 @@
             <div class="mag-contact-info">
                 <div class="mag-contact-item">
                     <i class="fas fa-envelope"></i>
-                    <span>info@avrilvelasco.com</span>
+                    <span>avrilvelasco@gmail.com</span>
                 </div>
                 <div class="mag-contact-item">
                     <i class="fab fa-whatsapp"></i>
@@ -1220,11 +1294,19 @@
         </div>
     </section>
 
+    </div>
     <footer class="mag-footer">
         © 2025 Avril Velasco · Quito, Ecuador <span class="heart">🇪🇨</span> · "Si yo quiero un baby, tú me das un baby..." 🐰
     </footer>
 
     <script>
+        function switchTab(tab) {
+            document.querySelectorAll('.main-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+            document.querySelector('.main-tab[data-tab="' + tab + '"]').classList.add('active');
+            document.getElementById('tab-' + tab).classList.add('active');
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) entry.target.classList.add('revealed');

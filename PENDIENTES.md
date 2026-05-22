@@ -1,0 +1,119 @@
+# Pendientes Avril Velasco — Para continuar mañana
+
+---
+
+## 🚨 URGENTES (hacer primero)
+
+### 1. Enviar link del uploader a Avril
+- **URL**: https://avrilvelasco.com/subir/
+- **Usuario**: `avril`
+- **Contraseña**: `velasco2025`
+- Pedirle que suba: fotos, videos, links de Canva, links de TikTok
+- Sin esto el portfolio sigue con placeholders
+
+### 2. Revisar que Avril pueda entrar al uploader
+- Probar desde su celular y computadora
+- Si tiene problemas con la contraseña, revisar `.htpasswd`
+
+### 3. Rotar contraseña del FTP temporal
+- La cuenta `avrilupload@avrilvelasco.com` todavía existe en cPanel
+- Cambiar la contraseña o borrar la cuenta si ya no se necesita
+
+---
+
+## 📸 CONTENIDO (cuando Avril suba archivos)
+
+### 4. Reemplazar placeholders del portfolio
+- Actualizar `web/index.html` con fotos reales de Avril
+- Actualizar galería de proyectos con trabajos reales
+- Agregar videos de TikTok / Reels si los sube
+
+### 5. Crear página de proyectos individuales
+- Cada proyecto del portfolio debería tener su propia página
+- Ej: `/proyectos/growix-social-media.html`
+
+### 6. Subir logo real de Growix SA
+- Reemplazar placeholder en sección de experiencia
+
+---
+
+## 🎨 DISEÑO Y MEJORAS
+
+### 7. Elegir versión final del portfolio
+- Actualmente hay 4 versiones: v2-cyberpunk, v3-magazine, v4-aurora
+- Decidir cuál es la principal y redirigir las otras
+- O hacer A/B testing
+
+### 8. Optimizar imágenes para web
+- Comprimir fotos que suba Avril (TinyPNG, Squoosh)
+- Generar versiones WebP para navegadores modernos
+
+### 9. Agregar SEO básico
+- Meta tags en `<head>` (title, description, Open Graph)
+- Favicon
+- Sitemap.xml
+
+---
+
+## 🔍 BUSQUEDA DE TRABAJO
+
+### 10. Activar campaña de LinkedIn
+- Usar skill `Busqueda_Trabajo_Avril/skills/01_linkedin_outreach/`
+- Personalizar mensajes con datos reales de Avril
+- Enviar 10 conexiones/día a empresas objetivo
+
+### 11. Preparar email de outbound
+- Usar template de `templates/email_outbound.md`
+- Definir lista de 20 empresas objetivo en Quito
+
+### 12. Optimizar CV de Avril
+- Usar skill `03_cv_optimizer`
+- Adaptar a Community Manager / Marketing Digital
+
+---
+
+## 🛠️ TÉCNICOS
+
+### 13. Configurar SSL forzoso
+- Verificar que https://avrilvelasco.com/ redirija HTTP → HTTPS
+- A veces LiteSpeed necesita regla en `.htaccess`
+
+### 14. Crear página 404 personalizada
+- Que combine con el diseño del portfolio
+- Link de vuelta al inicio
+
+### 15. Analytics
+- Agregar Google Analytics o Plausible
+- Para saber cuánta gente visita el portfolio
+
+### 16. Formulario de contacto funcional
+- Actualmente el portfolio solo muestra email y WhatsApp
+- Considerar Formspree o similar para formulario sin backend
+
+---
+
+## 📱 REDES SOCIALES
+
+### 17. Conectar dominio a Linktree alternativo
+- El portfolio ya puede servir como "link in bio"
+- Agregar botones destacados a TikTok, Instagram, LinkedIn
+
+### 18. Preview cards para redes
+- Cuando comparten https://avrilvelasco.com/ en WhatsApp/LinkedIn
+- Debe mostrar imagen preview, título y descripción
+
+---
+
+## ✅ COMPLETADOS (no tocar)
+
+- [x] Portfolio creado y deployado
+- [x] Uploader funcionando con protección
+- [x] Manual de marca online
+- [x] Repo GitHub privado creado
+- [x] Skill de deploy a Spaceship documentado
+- [x] 18 departamentos con skills creados
+- [x] Sistema de búsqueda de trabajo estructurado
+
+---
+
+*Creado: 2026-05-22 03:00 AM*

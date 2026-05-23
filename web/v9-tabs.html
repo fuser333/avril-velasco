@@ -954,8 +954,8 @@
 
         @media (max-width: 1024px) {
             .mag-hero { grid-template-columns: 1fr; min-height: auto; }
-            .mag-hero-right { min-height: 50vh; }
-            .hero-photo-blob { width: 240px; height: 280px; }
+            .mag-hero-right { min-height: auto; }
+            .hero-photo-blob { width: 200px; height: 240px; }
             .mag-about { grid-template-columns: 1fr; }
             .mag-depts-grid { grid-template-columns: repeat(2, 1fr); }
             .mag-portfolio-grid { grid-template-columns: repeat(2, 1fr); }
@@ -963,21 +963,88 @@
             .mag-skills-grid { grid-template-columns: repeat(2, 1fr); }
         }
         @media (max-width: 768px) {
-            .mag-nav-links { display: none; }
-            .mobile-toggle { display: block; }
-            .mag-hero-left { padding: 4rem 2rem 3rem; }
-            .mag-hero-left h1 { font-size: 3rem; }
-            .mag-section, .mag-depts, .mag-portfolio, .mag-contact, .mag-skills, .mag-experience { padding: 5rem 2rem; }
-            .mag-depts-grid { grid-template-columns: 1fr; }
-            .mag-portfolio-grid { grid-template-columns: 1fr; grid-auto-rows: 250px; }
-            .mag-about { padding: 0 2rem; }
-            .mag-skills-grid { grid-template-columns: 1fr; }
-            .mag-contact h2 { font-size: 2.5rem; }
-            .mag-about-stats { grid-template-columns: 1fr; }
-            .mag-exp-timeline::before { display: none; }
-            .mag-exp-item { padding-left: 0; }
-            .mag-exp-item::before { display: none; }
-            .mag-contact-info { gap: 1.5rem; }
+            /* Navigation - show tabs compact */
+            .mag-nav { padding: 1rem 1.25rem; flex-wrap: wrap; gap: 0.5rem; }
+            .mag-logo { font-size: 1.1rem; }
+            .mag-nav-links { gap: 0.3rem; }
+            .main-tab { padding: 0.4rem 0.8rem; font-size: 0.65rem; letter-spacing: 1px; }
+            .mobile-toggle { display: none; }
+
+            /* Hero - photo on top, compact */
+            .mag-hero { display: flex; flex-direction: column; }
+            .mag-hero-right { order: -1; min-height: auto; padding-top: 0; }
+            .mag-hero-image { min-height: auto; height: auto; padding: 1.5rem 1rem 1rem; background: none; }
+            .mag-hero-image::before, .mag-hero-image::after { display: none; }
+            .hero-photo-blob { width: 160px; height: 190px; }
+            .mag-hero-image .center-text, .mag-hero-badge { display: none; }
+            .mag-hero-left { padding: 1.5rem 1.5rem 2.5rem; text-align: center; align-items: center; }
+            .mag-hero-left h1 { font-size: 2.2rem; margin-bottom: 1rem; }
+            .mag-hero-left .subtitle { font-size: 0.95rem; margin-bottom: 1.5rem; max-width: 100%; }
+            .mag-hero-left .location { font-size: 0.8rem; margin-bottom: 1.5rem; justify-content: center; }
+            .mag-issue { margin-bottom: 1rem; letter-spacing: 2px; font-size: 0.65rem; }
+            .mag-cta { padding: 0.85rem 1.5rem; font-size: 0.7rem; letter-spacing: 1px; width: 100%; justify-content: center; }
+            .hero-cta-row { width: 100%; }
+
+            /* Sections - less padding */
+            .mag-section, .mag-depts, .mag-portfolio, .mag-contact, .mag-skills, .mag-experience { padding: 3rem 1.25rem; }
+            .mag-section-header h2, .mag-depts-header h2, .mag-portfolio-header h2, .mag-skills-header h2, .mag-contact h2 { font-size: 1.8rem; }
+            .mag-section-header .label { font-size: 0.65rem; }
+            .mag-section-header { margin-bottom: 2rem; }
+
+            /* About */
+            .mag-about { padding: 0 1.25rem; gap: 2rem; }
+            .mag-about-image-main { height: 250px; }
+            .mag-about-content h3 { font-size: 1.6rem; }
+            .mag-about-content p { font-size: 0.9rem; }
+            .mag-about-stats { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+            .mag-stat .num { font-size: 2rem; }
+            .mag-stat .label { font-size: 0.7rem; }
+
+            /* Departments */
+            .mag-depts-grid { grid-template-columns: 1fr; gap: 1rem; }
+            .mag-dept-item { padding: 1.5rem; }
+            .mag-dept-num { font-size: 2rem; }
+            .mag-dept-item h3 { font-size: 1rem; }
+            .mag-dept-item p { font-size: 0.8rem; }
+
+            /* Portfolio */
+            .mag-portfolio-grid { grid-template-columns: 1fr; grid-auto-rows: 200px; gap: 1rem; }
+            .mag-port-item .port-title { font-size: 1.1rem; }
+            .mag-port-item .port-cat { font-size: 0.65rem; }
+
+            /* Experience */
+            .mag-exp-header { margin-bottom: 2rem; }
+            .mag-exp-item { padding-left: 0; margin-bottom: 2rem; }
+            .mag-exp-item::before, .mag-exp-timeline::before { display: none; }
+            .mag-exp-item .exp-year { font-size: 0.65rem; }
+            .mag-exp-item h3 { font-size: 1.1rem; }
+            .mag-exp-item .exp-company { font-size: 0.8rem; }
+            .mag-exp-item p { font-size: 0.85rem; }
+
+            /* Skills */
+            .mag-skills-grid { grid-template-columns: 1fr; gap: 1rem; }
+            .mag-skill-card { padding: 1.5rem; }
+            .mag-skill-card h4 { font-size: 1rem; margin-bottom: 0.8rem; }
+            .mag-skill-card p { font-size: 0.8rem; }
+            .mag-skill-card .skill-tags { gap: 0.3rem; margin-top: 0.8rem; }
+            .mag-skill-card .skill-tags span { padding: 0.2rem 0.6rem; font-size: 0.7rem; }
+
+            /* Contact */
+            .mag-contact-info { gap: 1rem; flex-direction: column; align-items: stretch; }
+            .mag-contact-item { padding: 1rem; justify-content: flex-start; }
+            .mag-contact-item i { font-size: 1rem; width: 2rem; height: 2rem; }
+            .mag-contact-item span { font-size: 0.85rem; }
+
+            /* Footer */
+            .mag-footer { padding: 2rem 1.25rem; }
+            .mag-footer p { font-size: 0.75rem; }
+
+            /* Scroll reveal - disable on mobile, show immediately */
+            .sr, .sr-left, .sr-right, .sr-scale {
+                opacity: 1 !important;
+                transform: none !important;
+                transition: none !important;
+            }
         }
     </style>
 </head>
@@ -1008,7 +1075,7 @@
                 <i class="fas fa-map-marker-alt"></i>
                 <span>Quito, Ecuador · Negocios Internacionales USFQ · Arquitectura UTE</span>
             </div>
-            <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+            <div class="hero-cta-row" style="display:flex; gap:1rem; flex-wrap:wrap;">
                 <a href="v8-hero.html" class="mag-cta">Ver Hoja de Vida <i class="fas fa-arrow-right"></i></a>
                 <a href="#portfolio" class="mag-cta" style="background:transparent; color:var(--charcoal);">Ver Mi Trabajo</a>
             </div>
@@ -1296,7 +1363,7 @@
 
     </div>
     <footer class="mag-footer">
-        © 2025 Avril Velasco · Quito, Ecuador <span class="heart">🇪🇨</span> · "Si yo quiero un baby, tú me das un baby..." 🐰
+        © 2025 Avril Velasco · Quito, Ecuador <span class="heart">🇪🇨</span>
     </footer>
 
     <script>

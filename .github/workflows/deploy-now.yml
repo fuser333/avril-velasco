@@ -1,0 +1,28 @@
+name: Deploy Now
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Prepare files
+        run: |
+          mkdir -p deploy/assets
+          cp web/v9-tabs.html deploy/index.html
+          cp web/v8-hero.html deploy/v8-hero.html
+          cp web/assets/avril-foto-cv.png deploy/assets/
+          cp web/assets/hoja-de-vida-avril.pdf deploy/assets/
+          
+      - name: Deploy to FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: avrilvelasco.com
+          username: ${{ secrets.FTP_USER }}
+          password: ${{ secrets.FTP_PASS }}
+          local-dir: ./deploy/
+          server-dir: ./
+          dangerous-clean-slate: false

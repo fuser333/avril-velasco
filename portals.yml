@@ -1,0 +1,240 @@
+# Portal Scanner — Avril Velasco (Ecuador / LATAM)
+# Búsqueda de roles: Community Manager, Marketing Digital, Brand Manager
+
+location_filter:
+  always_allow:
+    - "Ecuador"
+    - "Quito"
+    - "Guayaquil"
+  allow:
+    - "Remote"
+    - "Latam"
+    - "LATAM"
+    - "Latin America"
+    - "Ecuador"
+    - "Quito"
+    - "Guayaquil"
+    - "Colombia"
+    - "Bogotá"
+    - "Medellín"
+    - "Perú"
+    - "Lima"
+    - "México"
+    - "CDMX"
+    - "Argentina"
+    - "Buenos Aires"
+    - "Chile"
+    - "Santiago"
+  block:
+    - "India"
+    - "Bengaluru"
+    - "United Kingdom"
+    - "London"
+    - "Germany"
+    - "Berlin"
+    - "France"
+    - "Paris"
+    - "Singapore"
+    - "Japan"
+    - "Tokyo"
+    - "Australia"
+    - "Sydney"
+    - "Nigeria"
+    - "South Africa"
+
+title_filter:
+  positive:
+    - "Community Manager"
+    - "Marketing Digital"
+    - "Digital Marketing"
+    - "Brand Manager"
+    - "Social Media"
+    - "Social Media Manager"
+    - "Content Creator"
+    - "Content Manager"
+    - "Copywriter"
+    - "Diseñador"
+    - "Diseñadora"
+    - "Graphic Designer"
+    - "Diseño Gráfico"
+    - "Publicista"
+    - "Relaciones Públicas"
+    - "PR"
+    - "Marketing Coordinator"
+    - "Marketing Specialist"
+    - "Growth"
+    - "Growth Marketing"
+    - "Performance Marketing"
+    - "Influencer"
+    - "Creator"
+  negative:
+    - "Senior Director"
+    - "VP"
+    - "Vice President"
+    - "Chief"
+    - "CMO"
+    - "CTO"
+    - "CEO"
+    - "Head of Engineering"
+    - "Software Engineer"
+    - "Developer"
+    - "Programador"
+    - "Data Scientist"
+    - "Ingeniero"
+    - "Engineer"
+    - "Analyst"
+    - "Sales"
+    - "Ventas"
+    - "Account Executive"
+    - "Customer Support"
+    - "Call Center"
+    - "Java"
+    - "Python"
+    - "React"
+    - "Angular"
+
+seniority_boost:
+  - "Senior"
+  - "Lead"
+  - "Head"
+  - "Manager"
+
+search_queries:
+  # LinkedIn Ecuador
+  - name: LinkedIn — Ecuador Marketing
+    query: 'site:linkedin.com/jobs "Community Manager" OR "Marketing Digital" OR "Social Media Manager" Ecuador'
+    enabled: true
+
+  - name: LinkedIn — Colombia Marketing
+    query: 'site:linkedin.com/jobs "Community Manager" OR "Marketing Digital" OR "Social Media Manager" Colombia'
+    enabled: true
+
+  - name: LinkedIn — Remote LATAM Marketing
+    query: 'site:linkedin.com/jobs "Community Manager" OR "Marketing Digital" OR "Brand Manager" remote latam'
+    enabled: true
+
+  # Indeed Ecuador
+  - name: Indeed — Ecuador
+    query: 'site:indeed.com "Community Manager" OR "Marketing Digital" Ecuador'
+    enabled: true
+
+  # Computrabajo Ecuador
+  - name: Computrabajo — Ecuador
+    query: 'site:computrabajo.com.ec "Community Manager" OR "Marketing Digital" OR "Publicista"'
+    enabled: true
+
+  # Multiocupas Ecuador
+  - name: Multiocupas — Ecuador
+    query: 'site:multiocupas.com "Community Manager" OR "Marketing Digital" OR "Diseñador"'
+    enabled: true
+
+  # Un Mejor Empleo
+  - name: Un Mejor Empleo — Ecuador
+    query: 'site:unmejorempleo.com.ec marketing digital community manager'
+    enabled: true
+
+  # Glassdoor Ecuador
+  - name: Glassdoor — Ecuador Marketing
+    query: 'site:glassdoor.com "Community Manager" OR "Marketing Digital" Ecuador'
+    enabled: true
+
+tracked_companies:
+  # Empresas ecuatorianas grandes
+  - name: Cervecería Nacional Ecuador
+    careers_url: https://www.cervecerianacional.ec/trabaja-con-nosotros
+    scan_method: websearch
+    enabled: true
+
+  - name: Grupo El Comercio
+    careers_url: https://www.elcomercio.com/
+    scan_method: websearch
+    enabled: true
+
+  - name: Banco Pichincha
+    careers_url: https://www.pichincha.com/portal/
+    scan_method: websearch
+    enabled: true
+
+  - name: Banco Guayaquil
+    careers_url: https://www.bancoguayaquil.com/
+    scan_method: websearch
+    enabled: true
+
+  - name: Tonicorp
+    careers_url: https://tonicorp.com/
+    scan_method: websearch
+    enabled: true
+
+  - name: Telefónica Ecuador (Movistar)
+    careers_url: https://www.telefonica.com/es/
+    scan_method: websearch
+    enabled: true
+
+  - name: Claro Ecuador
+    careers_url: https://www.claro.com.ec/
+    scan_method: websearch
+    enabled: true
+
+  # Agencias de marketing / publicidad Ecuador
+  - name: Publicis Ecuador
+    careers_url: https://www.publicis.com/
+    scan_method: websearch
+    enabled: true
+
+  - name: DDB Ecuador
+    careers_url: https://www.ddb.com/
+    scan_method: websearch
+    enabled: true
+
+  # Empresas tech LATAM
+  - name: Rappi
+    careers_url: https://www.rappi.com/jobs
+    scan_method: websearch
+    enabled: true
+
+  - name: Mercado Libre
+    careers_url: https://www.mercadolibre.com.ar/jobs
+    scan_method: websearch
+    enabled: true
+
+  - name: Nubank
+    careers_url: https://www.nubank.com.br/en/careers/
+    scan_method: websearch
+    enabled: true
+
+  - name: Kavak
+    careers_url: https://www.kavak.com/
+    scan_method: websearch
+    enabled: true
+
+  - name: Cornershop (Uber)
+    careers_url: https://www.cornershopapp.com/
+    scan_method: websearch
+    enabled: true
+
+  # Agencias globales con presencia LATAM
+  - name: Wunderman Thompson
+    careers_url: https://www.wundermanthompson.com/careers
+    scan_method: websearch
+    enabled: true
+
+  - name: Ogilvy
+    careers_url: https://www.ogilvy.com/careers
+    scan_method: websearch
+    enabled: true
+
+  - name: Havas
+    careers_url: https://www.havas.com/careers/
+    scan_method: websearch
+    enabled: true
+
+  # E-commerce / Retail Ecuador
+  - name: Coral
+    careers_url: https://www.coral.com.ec/
+    scan_method: websearch
+    enabled: true
+
+  - name: Megamaxi
+    careers_url: https://www.megamaxi.com/
+    scan_method: websearch
+    enabled: true

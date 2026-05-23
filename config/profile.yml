@@ -1,0 +1,63 @@
+# Career-Ops Profile — Avril Velasco
+candidate:
+  full_name: "Avril Velasco"
+  email: "avrilvelasco@gmail.com"
+  phone: "+593-999-568-215"
+  location: "Quito, Ecuador"
+  linkedin: "linkedin.com/in/avrilvelasco"
+  portfolio_url: "https://avrilvelasco.com"
+  github: "github.com/avrilvelasco"
+
+target_roles:
+  primary:
+    - "Community Manager"
+    - "Marketing Digital"
+    - "Brand Manager"
+  archetypes:
+    - name: "Community Manager"
+      level: "Junior/Mid"
+      fit: "primary"
+    - name: "Marketing Digital"
+      level: "Junior/Mid"
+      fit: "primary"
+    - name: "Brand Manager"
+      level: "Junior"
+      fit: "secondary"
+    - name: "Social Media Manager"
+      level: "Junior"
+      fit: "secondary"
+    - name: "Content Creator"
+      level: "Junior"
+      fit: "adjacent"
+
+narrative:
+  headline: "Ecuatoriana 100% — creo contenido que conecta. Community Manager + Marketing Digital con experiencia real en 3 países."
+  exit_story: "Empecé creando contenido para redes de mi familia, escalé a gestionar comunidades de importación internacional. Ahora busco llevar esa energía a una empresa que valore la creatividad latina."
+  superpowers:
+    - "Creación de contenido viral (TikTok, Reels, posts)"
+    - "Diseño gráfico profesional (Canva, Illustrator, Photoshop)"
+    - "Edición de video rápida (CapCut, Premiere básico)"
+    - "Gestión de comunidades bilingües (ES/EN)"
+    - "Visión estratégica de negocios internacionales"
+  proof_points:
+    - name: "Portfolio avrilvelasco.com"
+      url: "https://avrilvelasco.com"
+      hero_metric: "Portfolio profesional con tabs Perfil/Portfolio"
+    - name: "Growix SA — Community Manager"
+      url: ""
+      hero_metric: "Crecimiento orgánico de redes en Ecuador, Colombia y USA"
+
+compensation:
+  target_range: "$800-1,200"
+  currency: "USD"
+  minimum: "$600"
+  location_flexibility: "Presencial en Quito, híbrido posible, remoto LATAM"
+
+location:
+  country: "Ecuador"
+  city: "Quito"
+  timezone: "ECT (GMT-5)"
+  visa_status: "Ciudadana ecuatoriana, no necesita patrocinio"
+
+cv:
+  output_format: "html"

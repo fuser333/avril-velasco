@@ -131,3 +131,60 @@ Avril Velasco/
 ---
 
 *Documentar todo. Sin excepciones.*
+
+---
+
+## 2026-05-14 02:50 — Búsqueda Top 10 Repositorios Job Search (Global + China)
+
+### Contexto
+Usuario pidió re-hacer la búsqueda de los mejores repositorios para búsqueda de empleo, incluyendo China y otros mercados, con acceso a búsquedas globales.
+
+### Búsquedas realizadas
+1. `site:github.com job search automation AI stars:>1000` — repos globales
+2. `site:github.com "AIHawk" OR "ApplyPilot" OR "jobspy"` — repos específicos
+3. `site:gitee.com OR site:github.com 求职 招聘 找工作` — repos chinos
+4. `site:github.com "job tracker" OR "application tracker"` — trackers
+5. `site:github.com santifer career-ops` — verificar estado del repo actual
+
+### Resultados: Top 10 Repositorios
+
+| # | Repo | Stars | Estado | Relevancia Avril |
+|---|------|-------|--------|-----------------|
+| 1 | **career-ops** (santifer) | ~45k | ✅ Activo | YA ADAPTADO |
+| 2 | **AIHawk** (feder-cr) | 29.8k | ⚠️ ARCHIVADO mayo 2026 | No sirve (LinkedIn baneado) |
+| 3 | **ApplyPilot** (Pickle-Pixel) | ~8k | ✅ Activo | Robar ideas pipeline |
+| 4 | **JobSpy** (Bunsly) | 10k+ | ✅ Activo | Motor scraping útil |
+| 5 | **get_jobs** (loks666) China | ~5k | ✅ Activo | Ideas anti-spam + WhatsApp |
+| 6 | **AutoApply AI** (Rayyan9477) | ~3k | ✅ Activo | Ideas ATS scoring + tracking |
+| 7 | **JobSearch-Agent** (sreekar2858) | ~2k | ✅ Activo | Playwright + anonimización |
+| 8 | **job-scraper** (anandanair) | ~1.5k | ✅ Activo | GitHub Actions automation |
+| 9 | **ai-job-search-agent** (ashleysally00) | ~1k | ✅ Activo | No sirve (solo Greenhouse) |
+| 10 | **job-tracker** (christophernemala) | ~800 | ✅ Activo | Tracker web manual útil |
+
+### Hallazgos clave
+
+1. **AIHawk está MUERTO** — LinkedIn demandó al proyecto, todos los contribuidores baneados, repo archivado el 17 mayo 2026. Confirmamos que career-ops era la elección correcta.
+
+2. **China: get_jobs es el más relevante** — Aunque sus plataformas son chinas (Boss直聘, 51job, 智联招聘, 猎聘), sus soluciones son aplicables a Ecuador:
+   - Delay anti-spam entre aplicaciones
+   - CV en imagen para WhatsApp (en Ecuador WhatsApp es king)
+   - Blacklist automático de empresas que rechazaron
+   - Saludo personalizado con IA
+   - Notificaciones en tiempo real
+
+3. **JobSpy es el mejor motor de scraping** — Si alguna empresa ecuatoriana publica en LinkedIn/Indeed, JobSpy (`pip install python-jobspy`) es la librería más mantenida.
+
+4. **ApplyPilot tiene el mejor pipeline** — 6 etapas: Discover → Enrich → Score → Tailor → Cover → Auto-Apply. Adaptable a nuestro flujo de email outbound.
+
+5. **job-scraper (anandanair)** — GitHub Actions para automatización diaria. Podemos usar esto para ejecutar `generate_emails.py` semanalmente.
+
+### Documento generado
+- `ESTO/top10_job_repos.md` — 381 líneas, análisis completo comparativo
+
+### Acciones a futuro (añadidas a PENDIENTES.md)
+- Implementar delay anti-spam entre envíos de email
+- Crear tabla `empresas_rechazadas` en SQLite (blacklist)
+- Generar versión JPG del CV para WhatsApp
+- Crear script de ATS scoring (match 1-10 empresa vs perfil)
+- Configurar GitHub Actions para ejecutar generate_emails.py semanal
+- Crear dashboard HTML simple para tracking de estados

@@ -126,3 +126,14 @@
 ---
 
 *Creado: 2026-05-22 03:00 AM*
+
+## Nuevas tareas (post-research Top 10 repos)
+
+- [ ] **Delay anti-spam**: Añadir `time.sleep(random(30, 120))` entre envíos de email en generate_emails.py
+- [ ] **Blacklist SQLite**: Crear tabla `empresas_rechazadas` para no re-contactar empresas que dijeron "no"
+- [ ] **CV en imagen**: Generar versión JPG del CV para envío por WhatsApp (en Ecuador WhatsApp es el canal principal)
+- [ ] **ATS scoring**: Script que evalúa match empresa vs perfil Avril (1-10) y prioriza las mejores
+- [ ] **GitHub Actions**: Workflow para ejecutar generate_emails.py semanalmente y enviar reportes
+- [ ] **Dashboard tracking**: HTML simple para ver estado de todas las empresas contactadas
+- [ ] **JobSpy integration**: Probar `pip install python-jobspy` para scrapear LinkedIn/Indeed Ecuador
+- [ ] **Pipeline outbound**: Adaptar el pipeline de 6 etapas de ApplyPilot a email outbound ecuatoriano

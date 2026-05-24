@@ -2,3 +2,5 @@
 *.log
 .env
 .ftp_credentials
+data/*.db
+*.csv

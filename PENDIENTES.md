@@ -63,12 +63,15 @@
 - Enviar 10 conexiones/día a empresas objetivo
 
 ### 11. Preparar email de outbound
-- Usar template de `templates/email_outbound.md`
-- Definir lista de 20 empresas objetivo en Quito
+- ✅ DONE: Script `generate_emails.py` creado
+- ✅ DONE: 52 empresas en `portals.yml` (50 Pichincha + Cervecería Nacional + AB InBev)
+- ✅ DONE: Email para Pilsener listo en `outbound_pilsener.md`
+- Enviar 5-10 emails por día, llevar tracker en CSV
 
 ### 12. Optimizar CV de Avril
 - Usar skill `03_cv_optimizer`
 - Adaptar a Community Manager / Marketing Digital
+- Generar PDF ATS-optimizado con career-ops
 
 ---
 
@@ -113,6 +116,12 @@
 - [x] Skill de deploy a Spaceship documentado
 - [x] 18 departamentos con skills creados
 - [x] Sistema de búsqueda de trabajo estructurado
+- [x] Fixes de versión móvil (hero, navbar, cita, foto About)
+- [x] Base de datos de empresas ecuatorianas copiada y filtrada (7,876 empresas)
+- [x] Career-Ops clonado y adaptado para Avril (perfil + portals.yml + modo outbound)
+- [x] Email outbound generado para Pilsener / Cervecería Nacional
+- [x] Script `generate_emails.py` para generar lotes de emails
+- [x] CSVs exportados: 50 empresas Pichincha + 50 empresas Guayas
 
 ---
 

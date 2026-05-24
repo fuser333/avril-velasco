@@ -188,3 +188,51 @@ Usuario pidió re-hacer la búsqueda de los mejores repositorios para búsqueda 
 - Crear script de ATS scoring (match 1-10 empresa vs perfil)
 - Configurar GitHub Actions para ejecutar generate_emails.py semanal
 - Crear dashboard HTML simple para tracking de estados
+
+---
+
+## 2026-05-24 02:12 — Configuración SMTP + Filtro Quito + Email de prueba
+
+### Contexto
+Usuario pidió: (1) configurar SMTP de info@avrilvelasco.com, (2) enviar email de prueba a ingfuser33@gmail.com, (3) filtrar la base de datos SOLO Quito, (4) contar cuántos emails reales tenemos.
+
+### Configuración SMTP Spacemail (info@avrilvelasco.com)
+- **Server:** mail.spacemail.com
+- **Port:** 465 (SSL/TLS)
+- **User:** info@avrilvelasco.com
+- **Pass:** doxwEd-bypxo7-jedsig
+- **Estado:** ✅ Funcionando — email de prueba enviado exitosamente a ingfuser33@gmail.com
+
+### Filtro de base de datos: SOLO QUITO (todas las ramas)
+Usuario aclaró: NO solo marketing/publicidad. Cualquier empresa de Quito maneja un departamento de marketing/comunicación.
+
+**Resultados del filtro:**
+| Métrica | Valor |
+|---------|-------|
+| Total empresas Quito (Pichincha/Quito) | 71,006 |
+| Con al menos un email | 43,210 |
+| Emails únicos (sin duplicados) | **27,304** |
+
+**Top sectores en Quito con email:**
+1. Administración de bienes inmuebles — 2,567
+2. Asesoramiento a empresas — 1,223
+3. Construcción residencial — 1,197
+4. Transporte de carga — 879
+5. Asesoramiento contable — 813
+6. Bienes raíces — 775
+7. Diseño de estructura/contenido — 747
+8. Venta al por mayor diversa — 702
+9. Agencias de viajes — 652
+10. Representación jurídica — 651
+
+### Archivos generados
+- `data/empresas_quito_con_email.csv` — 43,210 empresas, 15MB
+- Columnas: ruc, nombre, tipo, provincia, canton, actividad, ciiu, telefono, representante, cargo, email, ingresos_ventas, n_empleados, activos
+
+### Siguiente paso
+Crear script `send_emails.py` que:
+- Lea el CSV de Quito
+- Envíe emails personalizados desde info@avrilvelasco.com
+- Con delay anti-spam (30-120 segundos entre envíos)
+- Trackee qué empresas ya fueron contactadas
+- Límite: ~20-30 emails por día para no ser marcado como spam

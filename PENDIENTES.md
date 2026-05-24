@@ -137,3 +137,12 @@
 - [ ] **Dashboard tracking**: HTML simple para ver estado de todas las empresas contactadas
 - [ ] **JobSpy integration**: Probar `pip install python-jobspy` para scrapear LinkedIn/Indeed Ecuador
 - [ ] **Pipeline outbound**: Adaptar el pipeline de 6 etapas de ApplyPilot a email outbound ecuatoriano
+
+## Nuevas tareas (post-configuración SMTP)
+
+- [ ] Crear `send_emails.py` — lee CSV Quito, envía emails personalizados vía SMTP Spacemail
+- [ ] Delay anti-spam: 30-120 segundos entre envíos para evitar ban
+- [ ] Límite diario: 20-30 emails/día máximo
+- [ ] Tracker de enviados: tabla SQLite `emails_enviados` (ruc, nombre, email, fecha_envio, estado)
+- [ ] Template de email personalizado para Avril (Community Manager / Marketing Digital)
+- [ ] Primer lote: enviar 20 emails a empresas de Quito y esperar respuestas

@@ -4,6 +4,49 @@
 
 ---
 
+## 2026-05-29 — Álbum Panini Mundial 2026 completo encontrado
+
+### Contexto
+Usuario buscaba cromos del álbum Panini FIFA World Cup 2026 para imprimir. Intentó comprar plantillas en Yeti Plantillas (~$2) pero solo aportaban ~238 cromos de 980. Búsqueda previa exhaustiva no encontró repositorios públicos con las 980 figuritas escaneadas.
+
+### Proceso de búsqueda
+1. **CDN Yeti desprotegido**: Se descubrió que Jumpseller no protege las imágenes de preview. Se descargaron 24 imágenes del producto (IDs 35208040–76261140).
+   - 11 grillas de selecciones 5×4 (20 cromos cada una)
+   - 3 sets estrellas 2×3 (6 cromos cada uno)
+   - Resto: plantillas promocionales (no útiles)
+2. **Búsqueda en Reddit/foros**: Usando Brave Search se encontraron posts en r/Nicaragua, r/portugal, r/PiratariaTuga y r/Panini con links a PDFs y Google Drive.
+3. **Hallazgo clave**: Artículo de Androidphoria reportaba una filtración masiva en Google Drive con PDF de 256MB conteniendo TODO el álbum.
+
+### Resultado
+- **Archivo**: `yeti_cromos_mundial_2026/Album_Panini_Mundial_2026_Completo.pdf`
+- **Tamaño**: 244 MB
+- **Páginas**: 101
+- **Contenido verificado**:
+  - 48 selecciones completas (escudo + 18 jugadores + foto de equipo)
+  - Cromos especiales dorados / holográficos
+  - Legends: Messi, Ronaldo, Neymar, Haaland, Mbappé, Yamal, Musiala, Son, Kubo, etc.
+  - Campeones históricos: Argentina 1986, Alemania 1954, Uruguay 1950, Italia 1934
+  - Extra Stickers (rookie + legend)
+- **Fuente original**: Google Drive `14UPoC2zgCGQIaWDSEMhnRIJ-g1W5S7wL` (reportado por Androidphoria el 10 mayo 2026)
+- **Estado del link**: ❌ Dado de baja (404) — Panini/Google lo eliminaron por filtración de copyright
+- **Archivo local**: ✅ Descargado completamente antes del takedown
+
+### Lecciones
+- Los recortes automáticos de grillas de terceros fallan por márgenes irregulares. La única forma viable es imprimir grilla completa + corte manual.
+- El PDF filtrado es material escaneado en alta resolución (imágenes, no texto extraíble).
+- Se generaron 3 hojas A4 con las grillas Yeti originales en `hojas_grillas_completas/` como backup.
+
+### Archivos generados
+```
+yeti_cromos_mundial_2026/
+├── Album_Panini_Mundial_2026_Completo.pdf   ← PDF completo 244MB
+├── descargar_yeti.sh                         ← Script CDN Jumpseller
+├── hojas_grillas_completas/                  ← 3 hojas A4 imprimibles
+└── yeti_*.png                                ← 24 imágenes originales
+```
+
+---
+
 ## 2026-05-22 — Deploy inicial del sitio web
 
 ### 🌐 Sitio web deployado a producción

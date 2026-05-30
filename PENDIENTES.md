@@ -138,6 +138,21 @@
 - [ ] **JobSpy integration**: Probar `pip install python-jobspy` para scrapear LinkedIn/Indeed Ecuador
 - [ ] **Pipeline outbound**: Adaptar el pipeline de 6 etapas de ApplyPilot a email outbound ecuatoriano
 
+## 🏆 CROMOS PANINI MUNDIAL 2026
+
+### Completados
+- [x] Álbum completo descargado (244MB, 101 páginas, todas las selecciones + especiales)
+- [x] Verificado contenido: México, Sudáfrica, Bélgica, Egipto, Legends, Campeones históricos
+- [x] Grillas Yeti descargadas y organizadas en hojas A4
+
+### Pendientes
+- [ ] Generar hojas A4 individuales desde el PDF completo para imprimir y recortar
+- [ ] Organizar por selecciones (imprimir solo las páginas que faltan del álbum físico)
+- [ ] Verificar si el PDF incluye las 12 estampas Coca-Cola exclusivas
+- [ ] Crear checklist digital de las 980 estampas para tracking de colección
+
+---
+
 ## Nuevas tareas (post-configuración SMTP)
 
 - [ ] Crear `send_emails.py` — lee CSV Quito, envía emails personalizados vía SMTP Spacemail
